@@ -1,22 +1,23 @@
 <template>
   <section id="projects" class="section-wrap">
     <div class="container">
-
       <!-- Label -->
-      <div class="section-label reveal">
+      <div class="section-label reveal-right">
         <span class="label-comment">// selected-projects</span>
         <div class="label-line"></div>
       </div>
 
-      <h2 class="section-heading reveal d1">Proyek.</h2>
+      <h2 class="section-heading reveal-right d1">Proyek.</h2>
 
       <!-- Project cards -->
       <div class="projects-grid">
         <article
           v-for="(p, i) in projects"
           :key="p.slug"
-          class="project-card reveal"
-          :class="`d${i + 1}`"
+          class="project-card reveal-left spotlight"
+          :class="`d${i + 2}`"
+          @mousemove="moveSpotlight"
+          @mouseleave="resetSpotlight"
         >
           <!-- Card header: file tab -->
           <div class="card-tab">
@@ -52,37 +53,32 @@
 
             <!-- Tech tags -->
             <div class="proj-tags">
-              <span
-                v-for="t in p.tech"
-                :key="t.name"
-                class="tag"
-                :style="{ '--tc': t.color }"
-              >&lt;{{ t.name }}&gt;</span>
+            <span v-for="t in p.tech" :key="t.name" class="tag" :style="{ '--tc': t.color }"
+              >{{ `<${t.name}>` }}</span
+            >
             </div>
           </div>
 
           <!-- Footer with GitHub button -->
           <div class="card-footer" v-if="p.github">
-            <a 
-              :href="p.github" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="btn-github"
-            >
+            <a :href="p.github" target="_blank" rel="noopener noreferrer" class="btn-github">
               <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                />
               </svg>
               <span>View on GitHub</span>
             </a>
           </div>
         </article>
       </div>
-
     </div>
   </section>
 </template>
 
 <script setup>
+import { observeReveal } from '../composables/useScrollReveal.js'
+
 const projects = [
   {
     slug: 'ekskul',
@@ -91,7 +87,7 @@ const projects = [
     badgeColor: 'rgba(167,139,250,0.2)',
     type: 'Web App',
     title: 'Website Ekstrakurikuler',
-    thumb: 'Ekstrakurikuler.png',
+    thumb: '/Ekstrakurikuler.png',
     desc: 'Platform digital untuk manajemen kegiatan ekstrakurikuler sekolah — mulai dari pendaftaran siswa, pengelolaan jadwal, hingga laporan administrasi.',
     bullets: [
       'Pendaftaran siswa ke kegiatan ekskul secara online',
@@ -99,11 +95,11 @@ const projects = [
       'Dashboard admin dengan ringkasan aktivitas',
     ],
     tech: [
-      { name: 'PHP',       color: '#a78bfa' },
-      { name: 'MySQL',     color: '#38bdf8' },
+      { name: 'PHP', color: '#a78bfa' },
+      { name: 'MySQL', color: '#38bdf8' },
       { name: 'Bootstrap', color: '#fb923c' },
-      { name: 'HTML',      color: '#f87171' },
-      { name: 'CSS',       color: '#38bdf8' },
+      { name: 'HTML', color: '#f87171' },
+      { name: 'CSS', color: '#38bdf8' },
     ],
     github: 'https://github.com/auraaly/ekstrakurikuler',
   },
@@ -114,7 +110,7 @@ const projects = [
     badgeColor: 'rgba(167,139,250,0.2)',
     type: 'Web App',
     title: 'Website Kas Kelas',
-    thumb: 'KasKelas.png',
+    thumb: '/KasKelas.png',
     desc: 'Aplikasi pengelolaan keuangan kelas berbasis web untuk mencatat pemasukan, pengeluaran, dan memantau laporan kas secara transparan.',
     bullets: [
       'Pencatatan transaksi pemasukan dan pengeluaran',
@@ -122,16 +118,37 @@ const projects = [
       'Histori pembayaran per anggota kelas',
     ],
     tech: [
-      { name: 'PHP',       color: '#a78bfa' },
-      { name: 'MySQL',     color: '#38bdf8' },
+      { name: 'PHP', color: '#a78bfa' },
+      { name: 'MySQL', color: '#38bdf8' },
       { name: 'Bootstrap', color: '#fb923c' },
-      { name: 'HTML',      color: '#f87171' },
-      { name: 'CSS',       color: '#38bdf8' },
+      { name: 'HTML', color: '#f87171' },
+      { name: 'CSS', color: '#38bdf8' },
     ],
     github: 'https://github.com/auraaly/KasKelas',
   },
 ]
+
+function moveSpotlight(e) {
+  const card = e.currentTarget
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+}
+
+function resetSpotlight(e) {
+  const card = e.currentTarget
+  card.style.setProperty('--mouse-x', '50%')
+  card.style.setProperty('--mouse-y', '50%')
+}
+
+observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.1 })
 </script>
 
-
-
+<style scoped>
+.project-card {
+  position: relative;
+}
+.project-card.spotlight::before {
+  z-index: 3;
+}
+</style>

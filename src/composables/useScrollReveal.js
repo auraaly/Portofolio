@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 /**
  * useScrollReveal — attaches an IntersectionObserver to one or more element refs.
@@ -28,6 +28,40 @@ export function useScrollReveal(targets, options = {}) {
     list.forEach((t) => {
       if (t.value) observer.observe(t.value)
     })
+  })
+
+  onUnmounted(() => {
+    if (observer) observer.disconnect()
+  })
+}
+
+/**
+ * observeReveal — observe all elements matching a selector inside a root element.
+ * Adds `.visible` class when they enter the viewport. Useful in component setup.
+ *
+ * @param {string} selector   — CSS selector for elements to reveal
+ * @param {object} options
+ * @param {number} options.threshold  — default 0.12
+ * @param {boolean} options.once      — default true
+ */
+export function observeReveal(selector, options = {}) {
+  const { threshold = 0.12, once = true } = options
+  let observer = null
+
+  onMounted(() => {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            if (once) observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold },
+    )
+
+    document.querySelectorAll(selector).forEach((el) => observer.observe(el))
   })
 
   onUnmounted(() => {

@@ -2,7 +2,7 @@
   <section id="experience" class="section-wrap">
     <div class="container">
 
-      <div class="section-label reveal">
+      <div class="section-label reveal-left">
         <span class="label-tag">Pengalaman</span>
         <div class="label-line"></div>
       </div>
@@ -10,12 +10,12 @@
       <div class="exp-layout">
 
         <!-- Kiri: heading -->
-        <div class="exp-left reveal d1">
+        <div class="exp-left reveal-left d1">
           <h2 class="exp-heading">Riwayat<br/><span class="heading-blue">Pengalaman.</span></h2>
         </div>
 
         <!-- Kanan: card -->
-        <div class="exp-card glass-card reveal d2">
+        <div class="exp-card glass-card reveal-right d2 spotlight" ref="expCardRef">
 
           <!-- Header card -->
           <div class="exp-card-top">         
@@ -33,15 +33,15 @@
           <div class="exp-divider"></div>
 
           <!-- Bullet points — normal, bukan log style -->
-          <ul class="exp-bullets">
-            <li v-for="(d, i) in details" :key="i" class="exp-bullet reveal" :class="`d${i+2}`">
+          <ul class="exp-bullets stagger-children" ref="bulletsRef">
+            <li v-for="(d, i) in details" :key="i" class="exp-bullet">
               <span class="bullet-dot"></span>
               <span>{{ d }}</span>
             </li>
           </ul>
 
           <!-- Tech stack — chip biasa -->
-          <div class="exp-tech reveal d5">
+          <div class="exp-tech reveal-pop d5 stagger-children" ref="techRef">
             <span v-for="t in techStack" :key="t" class="tech-chip">{{ t }}</span>
           </div>
 
@@ -53,7 +53,12 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { observeReveal } from '../composables/useScrollReveal.js'
+
+const expCardRef = ref(null)
+const bulletsRef = ref(null)
+const techRef = ref(null)
 
 const details = [
   'Mengembangkan aplikasi web full-stack menggunakan PHP, MySQL, dan JavaScript.',
@@ -65,15 +70,25 @@ const details = [
 
 const techStack = ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'Git', 'GitHub']
 
-let obs = null
+observeReveal('#experience .reveal-left, #experience .reveal-right, #experience .reveal-pop', { threshold: 0.1 })
+
 onMounted(() => {
-  obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-  }, { threshold: 0.1 })
-  document.querySelectorAll('#experience .reveal').forEach(el => obs.observe(el))
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.12 },
+  )
+  ;[bulletsRef, techRef].forEach((r) => r.value && observer.observe(r.value))
 })
-onUnmounted(() => obs?.disconnect())
 </script>
 
-
-
+<style scoped>
+.exp-card { position: relative; }
+.exp-card.spotlight::before { z-index: 2; }
+</style>

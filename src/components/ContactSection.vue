@@ -1,13 +1,13 @@
 <template>
   <section id="contact" class="section-wrap">
     <div class="container">
-      <div class="contact-label reveal">
+      <div class="contact-label reveal-scale">
         <span>// kontak</span>
         <div></div>
       </div>
 
       <div class="contact-layout">
-        <div class="contact-intro reveal d1">
+        <div class="contact-intro reveal-left d1">
           <p class="contact-kicker">Mari bekerja sama</p>
           <h2>Terhubung untuk ide berikutnya.</h2>
           <p>
@@ -15,7 +15,7 @@
             melalui salah satu kanal berikut.
           </p>
           
-          <div class="contact-details">
+          <div class="contact-details stagger-children" ref="itemsRef">
             <a
               v-for="item in contactItems"
               :key="item.label"
@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <div class="contact-form-card reveal d2">
+        <div class="contact-form-card reveal-right d2 spotlight" ref="formRef">
           <h3 class="form-heading">Kirim Pesan</h3>
           <form @submit.prevent="handleSubmit" class="contact-form">
             <div class="form-group">
@@ -81,7 +81,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { observeReveal } from '../composables/useScrollReveal.js'
+
+const itemsRef = ref(null)
+const formRef = ref(null)
 
 const contactItems = [
   { label: 'Email', value: 'auramalia30@gmail.com', href: 'mailto:auramalia30@gmail.com' },
@@ -109,17 +113,25 @@ const handleSubmit = () => {
   formData.value = { name: '', email: '', message: '' }
 }
 
-let observer = null
+observeReveal('#contact .reveal-scale, #contact .reveal-left, #contact .reveal-right', { threshold: 0.1 })
+
 onMounted(() => {
-  observer = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible')
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+          observer.unobserve(entry.target)
+        }
       })
     },
-    { threshold: 0.1 },
+    { threshold: 0.12 },
   )
-  document.querySelectorAll('#contact .reveal').forEach((element) => observer.observe(element))
+  if (itemsRef.value) observer.observe(itemsRef.value)
 })
-onUnmounted(() => observer?.disconnect())
 </script>
+
+<style scoped>
+.contact-form-card { position: relative; }
+.contact-form-card.spotlight::before { z-index: 2; }
+</style>

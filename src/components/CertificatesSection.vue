@@ -3,20 +3,23 @@
     <div class="container">
 
       <!-- Label -->
-      <div class="section-label reveal">
+      <div class="section-label reveal-rotate">
         <span class="label-comment">// achievements</span>
         <div class="label-line"></div>
       </div>
 
-      <h2 class="section-heading reveal d1">Sertifikat.</h2>
+      <h2 class="section-heading reveal-rotate d1">Sertifikat.</h2>
 
       <!-- Certificate cards -->
       <div class="certs-grid">
         <div
           v-for="(cert, i) in certs"
           :key="cert.title"
-          class="cert-card reveal"
-          :class="`d${i + 1}`"
+          class="cert-card reveal-rotate spotlight"
+          :class="`d${i + 2}`"
+          :style="{ '--gc': cert.glowColor }"
+          @mousemove="moveSpotlight"
+          @mouseleave="resetSpotlight"
         >
           <!-- Gradient glow border -->
           <div class="cert-glow" :style="{ '--gc': cert.glowColor }"></div>
@@ -45,7 +48,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { observeReveal } from '../composables/useScrollReveal.js'
 
 const certs = [
   {
@@ -66,15 +69,23 @@ const certs = [
   },
 ]
 
-let obs = null
-onMounted(() => {
-  obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-  }, { threshold: 0.12 })
-  document.querySelectorAll('#certificates .reveal').forEach(el => obs.observe(el))
-})
-onUnmounted(() => obs?.disconnect())
+function moveSpotlight(e) {
+  const card = e.currentTarget
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+}
+
+function resetSpotlight(e) {
+  const card = e.currentTarget
+  card.style.setProperty('--mouse-x', '50%')
+  card.style.setProperty('--mouse-y', '50%')
+}
+
+observeReveal('#certificates .reveal-rotate', { threshold: 0.12 })
 </script>
 
-
-
+<style scoped>
+.cert-card { position: relative; }
+.cert-card.spotlight::before { z-index: 3; }
+</style>

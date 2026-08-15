@@ -2,12 +2,12 @@
   <section id="education" class="section-wrap">
     <div class="container">
 
-      <div class="section-label">
+      <div class="section-label reveal-scale">
         <span class="label-tag">Pendidikan</span>
         <div class="label-line"></div>
       </div>
 
-      <div class="edu-card">
+      <div class="edu-card reveal-scale d1 spotlight">
         <div class="edu-info">
           <h3 class="edu-school">SMK Negeri 7 Samarinda</h3>
           <p class="edu-program">Pengembangan Perangkat Lunak dan Gim (PPLG)</p>
@@ -20,7 +20,9 @@
 </template>
 
 <script setup>
-// no JS needed
+import { observeReveal } from '../composables/useScrollReveal.js'
+
+observeReveal('#education .reveal-scale', { threshold: 0.12 })
 </script>
 
 <style scoped>
@@ -60,10 +62,11 @@
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.25s ease;
   flex-wrap: wrap;
+  position: relative;
 }
-.edu-card:hover { border-color: var(--border-b); }
+.edu-card:hover { border-color: var(--border-b); transform: translateY(-4px); }
 
 .edu-icon {
   font-size: 2rem;
@@ -95,6 +98,8 @@
   background: var(--surface);
   white-space: nowrap;
 }
+
+.edu-card.spotlight::before { z-index: 2; }
 
 @media (max-width: 560px) {
   .edu-card { padding: 20px; gap: 14px; }

@@ -4,11 +4,16 @@
 
   <!-- Page curtain -->
   <div class="curtain" :class="{ out: curtainOut }"></div>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
+
+  <!-- Ambient orbs -->
+  <div class="ambient ambient-one" ref="orb1"></div>
+  <div class="ambient ambient-two" ref="orb2"></div>
+
+  <!-- Cursor glow (desktop only) -->
+  <div class="cursor-glow" :style="cursorGlowStyle"></div>
 
   <NavBar />
-  <main @mousemove="onPointerMove">
+  <main @mousemove="onPointerMove" @mouseleave="hideCursorGlow">
     <HeroSection />
     <AboutSection />
     <SkillsSection />
@@ -36,10 +41,24 @@ import FooterSection       from './components/FooterSection.vue'
 
 const curtainOut = ref(false)
 const scrollPct  = ref(0)
+const cursorX = ref(-200)
+const cursorY = ref(-200)
+const orb1 = ref(null)
+const orb2 = ref(null)
+
+const cursorGlowStyle = ref({
+  transform: 'translate(-50%, -50%) translate3d(-200px, -200px, 0)',
+  opacity: '0',
+})
 
 function onScroll() {
   const docH = document.documentElement.scrollHeight - window.innerHeight
   scrollPct.value = docH > 0 ? (window.scrollY / docH) * 100 : 0
+
+  // Subtle parallax for ambient orbs
+  const y = window.scrollY || 0
+  if (orb1.value) orb1.value.style.transform = `translate3d(0, ${y * 0.08}px, 0)`
+  if (orb2.value) orb2.value.style.transform = `translate3d(0, ${-y * 0.06}px, 0)`
 }
 
 function onPointerMove(event) {
@@ -47,6 +66,17 @@ function onPointerMove(event) {
   const y = `${(event.clientY / window.innerHeight) * 100}%`
   document.documentElement.style.setProperty('--pointer-x', x)
   document.documentElement.style.setProperty('--pointer-y', y)
+
+  cursorX.value = event.clientX
+  cursorY.value = event.clientY
+  cursorGlowStyle.value = {
+    transform: `translate(-50%, -50%) translate3d(${event.clientX}px, ${event.clientY}px, 0)`,
+    opacity: window.innerWidth > 768 ? '0.18' : '0',
+  }
+}
+
+function hideCursorGlow() {
+  cursorGlowStyle.value.opacity = '0'
 }
 
 onMounted(() => {
@@ -79,6 +109,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   pointer-events: none;
   z-index: 0;
   animation: drift 16s ease-in-out infinite alternate;
+  will-change: transform;
 }
 .ambient-one { top: 8%; right: -15rem; background: #38bdf8; }
 .ambient-two { bottom: 6%; left: -14rem; background: #a78bfa; animation-delay: -7s; }
@@ -86,5 +117,24 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 @keyframes drift {
   from { transform: translate3d(0, 0, 0) scale(0.9); }
   to { transform: translate3d(-4rem, 3rem, 0) scale(1.12); }
+}
+
+/* Cursor glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,0.22), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: screen;
+}
+
+@media (pointer: coarse) {
+  .cursor-glow { display: none; }
 }
 </style>
