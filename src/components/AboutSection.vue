@@ -29,16 +29,34 @@
           </p>
         </div>
 
-        <!-- Kanan: info cards -->
+        <!-- Kanan: info card -->
         <div class="about-right reveal-right d2">
-          <div class="about-cards stagger-children" ref="cardsRef">
-            <div class="about-card spotlight" v-for="(card, i) in infoCards" :key="i">
-              <div class="about-card-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" v-html="card.icon"></svg>
+          <div class="about-info-card spotlight">
+            <div class="info-row">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
               </div>
-              <div class="about-card-content">
-                <span class="about-card-label">{{ card.label }}</span>
-                <span class="about-card-val">{{ card.value }}</span>
+              <div class="info-content">
+                <span class="info-label">Domisili</span>
+                <span class="info-value">Samarinda, Indonesia</span>
+              </div>
+            </div>
+
+            <div class="info-divider"></div>
+
+            <div class="info-row">
+              <div class="info-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <span class="info-label">Status</span>
+                <span class="info-value">PKL · Dinas Komunikasi dan Informatika Kota Samarinda</span>
               </div>
             </div>
           </div>
@@ -50,40 +68,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { observeReveal } from '../composables/useScrollReveal.js'
 
-const cardsRef = ref(null)
-
-const infoCards = [
-  {
-    label: 'Domisili',
-    value: 'Samarinda, Indonesia',
-    icon: '<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>',
-  },
-  {
-    label: 'Status',
-    value: 'PKL · Dinas Komunikasi dan Informatika Kota Samarinda',
-    icon: '<path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" fill="currentColor"/>',
-  },
-]
-
 observeReveal('#about .reveal-left, #about .reveal-right', { threshold: 0.12 })
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15 },
-  )
-  if (cardsRef.value) observer.observe(cardsRef.value)
-})
 </script>
 
 <style scoped>

@@ -80,8 +80,6 @@ const stats = [
 ]
 const animatedStats = ref(stats.map(s => ({ ...s, display: 0 })))
 
-const techPills = ['Vue.js', 'PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'Git']
-
 // Tilt effect
 const tilt = ref({ x: 0, y: 0 })
 const tiltStyle = computed(() => ({
@@ -222,31 +220,31 @@ onMounted(() => {
   100% { transform: translateY(-20px) rotate(2deg); opacity: 1; }
 }
 
-/* Glow orb behind profile */
-.hero-right {
-  position: relative;
-}
-.hero-right::before {
+/* Code matrix overlay inside hero */
+.hero::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, rgba(167,139,250,0.08) 40%, transparent 70%);
+  inset: 0;
   pointer-events: none;
-  z-index: -1;
-  animation: glow-pulse 6s ease-in-out infinite;
+  z-index: 0;
+  background-image:
+    linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 70% 40%, black 0%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, black 0%, transparent 65%);
+  animation: grid-pan 24s linear infinite;
 }
-@keyframes glow-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
-  50% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 64px 64px; }
 }
 
-/* Subtle border shimmer on CTA primary */
-.cta-primary {
-  position: relative;
+[data-theme="light"] .hero::after {
+  background-image:
+    linear-gradient(90deg, rgba(56,189,248,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(56,189,248,0.08) 1px, transparent 1px);
+
   overflow: hidden;
 }
 .cta-primary::after {
