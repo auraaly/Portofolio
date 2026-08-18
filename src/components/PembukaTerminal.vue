@@ -71,7 +71,7 @@ const perintah = 'npm run build'
 onMounted(() => {
   document.body.style.overflow = 'hidden'
 
-  // Mengetik perintah "npm run dev" per huruf (smooth 65ms per huruf)
+  // Mengetik perintah "npm run build" per huruf (santai 95ms per huruf)
   let indeksHuruf = 0
   const timerKetik = setInterval(() => {
     if (indeksHuruf < perintah.length) {
@@ -81,26 +81,26 @@ onMounted(() => {
       clearInterval(timerKetik)
       mulaiJalankanServer()
     }
-  }, 65)
+  }, 95)
 })
 
 function mulaiJalankanServer() {
   setTimeout(() => {
     tampilkanLog.value = true
 
-    setTimeout(() => { tahapServer.value = 2 }, 350)
-    setTimeout(() => { tahapServer.value = 3 }, 800)
+    setTimeout(() => { tahapServer.value = 2 }, 650)
+    setTimeout(() => { tahapServer.value = 3 }, 1400)
 
-    // Pergerakan progress bar lebih halus (interval 16ms ~60fps)
+    // Progress bar lebih tenang & dapat dinikmati (interval 28ms)
     const timerProgress = setInterval(() => {
-      nilaiProgress.value += 2.5
+      nilaiProgress.value += 1.8
       if (nilaiProgress.value >= 100) {
         nilaiProgress.value = 100
         clearInterval(timerProgress)
         selesaiLoading()
       }
-    }, 16)
-  }, 200)
+    }, 28)
+  }, 400)
 }
 
 function selesaiLoading() {
@@ -108,7 +108,7 @@ function selesaiLoading() {
     tampilkanLayar.value = false
     document.body.style.overflow = ''
     emit('finish')
-  }, 400)
+  }, 600)
 }
 </script>
 
