@@ -6,7 +6,7 @@
         <div></div>
       </div>
 
-      <div class="contact-layout">
+      <div class="contact-layout contact-layout-single">
         <div class="contact-intro reveal-left d1">
           <p class="contact-kicker">Mari bekerja sama</p>
           <h2>Terhubung untuk ide berikutnya.</h2>
@@ -29,52 +29,6 @@
             </a>
           </div>
         </div>
-
-        <div class="contact-form-card reveal-right d2 spotlight" ref="formRef">
-          <h3 class="form-heading">Kirim Pesan</h3>
-          <form @submit.prevent="handleSubmit" class="contact-form">
-            <div class="form-group">
-              <label for="name" class="form-label">Nama</label>
-              <input 
-                type="text" 
-                id="name" 
-                v-model="formData.name"
-                class="form-input" 
-                placeholder="Nama lengkap Anda"
-                required
-              />
-            </div>
-            
-            <div class="form-group">
-              <label for="email" class="form-label">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                v-model="formData.email"
-                class="form-input" 
-                placeholder="email@example.com"
-                required
-              />
-            </div>
-            
-            <div class="form-group">
-              <label for="message" class="form-label">Pesan</label>
-              <textarea 
-                id="message" 
-                v-model="formData.message"
-                class="form-textarea" 
-                placeholder="Tulis pesan Anda di sini..."
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            
-            <button type="submit" class="form-submit">
-              <span>Kirim Pesan</span>
-              <span class="submit-arrow">→</span>
-            </button>
-          </form>
-        </div>
       </div>
     </div>
   </section>
@@ -85,46 +39,21 @@ import { ref, onMounted } from 'vue'
 import { observeReveal } from '../composables/useScrollReveal.js'
 
 const itemsRef = ref(null)
-const formRef = ref(null)
 
 const contactItems = [
   { label: 'Email', value: 'auramalia30@gmail.com', href: 'mailto:auramalia30@gmail.com' },
   { label: 'WhatsApp', value: '+62 821 5268 3875', href: 'https://wa.me/6282152683875' },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/auramaliaa',
-    href: 'https://linkedin.com/in/auramaliaa',
-  },
+  { label: 'LinkedIn', value: 'linkedin.com/in/auramaliaa', href: 'https://linkedin.com/in/auramaliaa' },
   { label: 'GitHub', value: 'github.com/auraaly', href: 'https://github.com/auraaly' },
 ]
 
-const formData = ref({
-  name: '',
-  email: '',
-  message: ''
-})
-
-const handleSubmit = () => {
-  const { name, email, message } = formData.value
-  const mailtoLink = `mailto:auramalia30@gmail.com?subject=Pesan dari ${encodeURIComponent(name)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`
-  window.location.href = mailtoLink
-  
-  // Reset form
-  formData.value = { name: '', email: '', message: '' }
-}
-
-observeReveal('#contact .reveal-scale, #contact .reveal-left, #contact .reveal-right', { threshold: 0.1 })
+observeReveal('#contact .reveal-scale, #contact .reveal-left', { threshold: 0.1 })
 
 onMounted(() => {
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
+    (entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target) }
+    }),
     { threshold: 0.12 },
   )
   if (itemsRef.value) observer.observe(itemsRef.value)
@@ -132,6 +61,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.contact-form-card { position: relative; }
-.contact-form-card.spotlight::before { z-index: 2; }
+.contact-layout-single {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+  margin: 0 auto;
+}
 </style>

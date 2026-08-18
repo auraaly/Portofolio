@@ -7,11 +7,11 @@
 
 /* ── Variables ── */
 :root {
-  --bg:       #050d1a;
-  --surface:  #0a1628;
-  --card:     #0d1f36;
-  --border:   #1a3050;
-  --border-b: #2a4a70;
+  --bg:       #0a1628;
+  --surface:  #102035;
+  --card:     #152540;
+  --border:   #223a5e;
+  --border-b: #2e5080;
   --blue:     #38bdf8;
   --blue-b:   #7dd3fc;
   --blue-d:   #0ea5e9;
@@ -701,30 +701,34 @@ main > section:not(:first-child) { position: relative; }
   font-family: var(--display);
   font-size: clamp(2.6rem, 5vw, 4.8rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   margin-bottom: 12px;
   background: linear-gradient(135deg, var(--blue-b) 0%, var(--blue) 40%, var(--purple) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  word-spacing: normal;
-  white-space: pre-line;
 }
 
-.hero-name .char {
-  display: inline-block;
-  min-width: 0.05em;
-}
-
-.hero-name .char:empty::before {
-  content: '\00a0';
-  display: inline-block;
-  width: 0.4em;
-}
 .hero-tagline { font-size: 1.05rem; color: var(--t2); }
 .hero-desc { font-size: 0.95rem; color: var(--t2); line-height: 1.8; max-width: 460px; }
 .hero-desc strong { color: var(--blue-b); font-weight: 600; }
+
+.hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.hero-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--t2);
+}
+.hero-info-item svg { color: var(--blue); flex-shrink: 0; }
+
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .cta-primary {
   display: inline-flex;
@@ -1214,11 +1218,18 @@ main > section:not(:first-child) { position: relative; }
   }
   .group-chips {
     justify-content: center;
+    gap: 12px;
   }
   .chip-icon {
-    width: 56px;
-    height: 56px;
-    font-size: 1.8rem;
+    min-width: 80px;
+    padding: 16px 12px;
+    gap: 8px;
+  }
+  .chip-icon i {
+    font-size: 2rem;
+  }
+  .chip-name {
+    font-size: 0.72rem;
   }
 }
 

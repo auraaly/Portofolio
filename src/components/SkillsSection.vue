@@ -16,9 +16,9 @@
             <span class="group-dot dot-red"></span>
             Frontend
           </div>
-          <div class="group-chips stagger-children" ref="feRef">
+          <div class="group-chips">
             <div v-for="s in frontendSkills" :key="s.name" class="chip-icon">
-              <i :class="s.icon" :style="{ color: s.color }"></i>
+              <img :src="s.icon" :alt="s.name" class="chip-img" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -29,9 +29,9 @@
             <span class="group-dot dot-purple"></span>
             Backend
           </div>
-          <div class="group-chips stagger-children" ref="beRef">
+          <div class="group-chips">
             <div v-for="s in backendSkills" :key="s.name" class="chip-icon">
-              <i :class="s.icon" :style="{ color: s.color }"></i>
+              <img :src="s.icon" :alt="s.name" class="chip-img" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -42,9 +42,9 @@
             <span class="group-dot dot-green"></span>
             Tools
           </div>
-          <div class="group-chips stagger-children" ref="toolsRef">
+          <div class="group-chips">
             <div v-for="s in toolsSkills" :key="s.name" class="chip-icon">
-              <i :class="s.icon" :style="{ color: s.color }"></i>
+              <img :src="s.icon" :alt="s.name" class="chip-img" :class="{ 'img-invert': s.invert }" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -56,48 +56,47 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { observeReveal } from '../composables/useScrollReveal.js'
 
-const feRef = ref(null)
-const beRef = ref(null)
-const toolsRef = ref(null)
+const base = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 
 const frontendSkills = [
-  { name: 'HTML5', icon: 'fab fa-html5', color: '#E34F26' },
-  { name: 'CSS3', icon: 'fab fa-css3-alt', color: '#1572B6' },
-  { name: 'JavaScript', icon: 'fab fa-js', color: '#F7DF1E' },
-  { name: 'Vue.js', icon: 'fab fa-vuejs', color: '#4FC08D' },
-  { name: 'Bootstrap', icon: 'fab fa-bootstrap', color: '#7952B3' }
+  { name: 'HTML5',      icon: `${base}/html5/html5-original.svg` },
+  { name: 'CSS3',       icon: `${base}/css3/css3-original.svg` },
+  { name: 'JavaScript', icon: `${base}/javascript/javascript-original.svg` },
+  { name: 'Vue.js',     icon: `${base}/vuejs/vuejs-original.svg` },
+  { name: 'Bootstrap',  icon: `${base}/bootstrap/bootstrap-original.svg` },
+  { name: 'Tailwind',   icon: `${base}/tailwindcss/tailwindcss-original.svg` },
 ]
 
 const backendSkills = [
-  { name: 'PHP', icon: 'fab fa-php', color: '#777BB4' },
-  { name: 'MySQL', icon: 'fas fa-database', color: '#4479A1' },
-  { name: 'REST API', icon: 'fas fa-server', color: '#38bdf8' }
+  { name: 'PHP',     icon: `${base}/php/php-original.svg` },
+  { name: 'MySQL',   icon: `${base}/mysql/mysql-original.svg` },
+  { name: 'Node.js', icon: `${base}/nodejs/nodejs-original.svg` },
 ]
 
 const toolsSkills = [
-  { name: 'Git', icon: 'fab fa-git-alt', color: '#F05032' },
-  { name: 'GitHub', icon: 'fab fa-github', color: '#181717' },
-  { name: 'VS Code', icon: 'fas fa-code', color: '#007ACC' },
-  { name: 'Figma', icon: 'fab fa-figma', color: '#F24E1E' }
+  { name: 'Git',     icon: `${base}/git/git-original.svg` },
+  { name: 'GitHub',  icon: `${base}/github/github-original-wordmark.svg`, invert: true },
+  { name: 'VS Code', icon: `${base}/vscode/vscode-original.svg` },
+  { name: 'Figma',   icon: `${base}/figma/figma-original.svg` },
 ]
 
 observeReveal('#skills .reveal-scale', { threshold: 0.1 })
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.15 },
-  )
-  ;[feRef, beRef, toolsRef].forEach((r) => r.value && observer.observe(r.value))
-})
 </script>
+
+<style scoped>
+.chip-img {
+  width: 2.8rem;
+  height: 2.8rem;
+  object-fit: contain;
+  transition: transform var(--tf);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.img-invert {
+  filter: invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.chip-icon:hover .chip-img {
+  transform: scale(1.15) translateY(-2px);
+}
+</style>

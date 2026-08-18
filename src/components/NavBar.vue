@@ -97,11 +97,12 @@ function initTheme() {
 }
 
 const links = [
-  { id: 'hero',         label: 'Beranda'   },
-  { id: 'about',        label: 'Tentang'   },
-  { id: 'skills',       label: 'Kemampuan' },
-  { id: 'projects',     label: 'Proyek'    },
-  { id: 'contact',      label: 'Kontak'    },
+  { id: 'hero',         label: 'Beranda'    },
+  { id: 'skills',       label: 'Kemampuan'  },
+  { id: 'projects',     label: 'Proyek'     },
+  { id: 'education',    label: 'Pendidikan' },
+  { id: 'certificates', label: 'Sertifikat' },
+  { id: 'contact',      label: 'Kontak'     },
 ]
 
 const sections = ['hero','about','skills','experience','projects','education','certificates','contact']
