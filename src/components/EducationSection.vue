@@ -2,12 +2,9 @@
   <section id="education" class="section-wrap">
     <div class="container">
 
-      <div class="edu-header reveal-left">
-        <div class="section-label">
-          <span class="label-tag">Pendidikan</span>
-          <div class="label-line"></div>
-        </div>
-        <h2 class="edu-title">Riwayat <span class="edu-title-accent">Pendidikan</span></h2>
+      <div class="section-divider reveal-left">
+        <span class="section-badge">Pendidikan</span>
+        <div class="divider-line"></div>
       </div>
 
       <div class="edu-layout reveal-right d1">

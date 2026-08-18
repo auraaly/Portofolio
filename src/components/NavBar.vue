@@ -75,6 +75,7 @@ let lastY = 0
 
 const isDark = ref(true)
 
+// Fungsi untuk menerapkan tema gelap atau terang ke dokumen HTML & localStorage
 function applyTheme(dark) {
   isDark.value = dark
   if (dark) {
@@ -86,10 +87,12 @@ function applyTheme(dark) {
   }
 }
 
+// Fungsi untuk mengganti tema (toggle) saat tombol bulan/matahari diklik
 function toggleTheme() {
   applyTheme(!isDark.value)
 }
 
+// Fungsi untuk mengecek tema yang tersimpan di memori browser saat pertama kali dibuka
 function initTheme() {
   const saved = localStorage.getItem('theme')
   if (saved === 'light') applyTheme(false)
@@ -105,8 +108,10 @@ const links = [
   { id: 'contact',      label: 'Kontak'     },
 ]
 
-const sections = ['hero','about','skills','experience','projects','education','certificates','contact']
+// Daftar ID seksi yang aktif di halaman
+const sections = ['hero','skills','projects','education','certificates','contact']
 
+// Fungsi untuk memantau scroll layar (mengubah style navbar & menandai menu aktif)
 function onScroll() {
   const y = window.scrollY
   scrolled.value  = y > 40
@@ -114,6 +119,7 @@ function onScroll() {
   if (y < lastY - 5 || y < 200) navHidden.value = false
   lastY = y
 
+  // Menentukan menu navigasi mana yang sedang aktif sesuai posisi scroll
   const pos = y + 140
   for (let i = sections.length - 1; i >= 0; i--) {
     const el = document.getElementById(sections[i])
@@ -121,11 +127,14 @@ function onScroll() {
   }
 }
 
+// Mengaktifkan pemantauan scroll saat komponen dipasang di layar
 onMounted(() => {
   lastY = window.scrollY
   initTheme()
   window.addEventListener('scroll', onScroll, { passive: true })
 })
+
+// Membersihkan pemantauan scroll saat berpindah halaman agar tidak boros memori
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 

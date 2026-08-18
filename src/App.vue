@@ -1,4 +1,7 @@
 <template>
+  <!-- Animasi Pembuka Terminal -->
+  <PembukaTerminal v-if="showLoader" @finish="onLoaderFinish" />
+
   <!-- Scroll progress bar -->
   <div id="scroll-progress" :style="{ width: scrollPct + '%' }"></div>
 
@@ -12,13 +15,10 @@
   <!-- Cursor glow (desktop only) -->
   <div class="cursor-glow" :style="cursorGlowStyle"></div>
 
-  
-
   <NavBar />
   <main @mousemove="onPointerMove" @mouseleave="hideCursorGlow">
     <HeroSection />
     <SkillsSection />
-    <ExperienceSection />
     <ProjectsSection />
     <EducationSection />
     <CertificatesSection />
@@ -28,39 +28,54 @@
 </template>
 
 <script setup>
+// Impor Reactivity API dari Vue
 import { ref, onMounted, onUnmounted } from 'vue'
-import NavBar              from './components/NavBar.vue'
-import HeroSection         from './components/HeroSection.vue'
-import SkillsSection       from './components/SkillsSection.vue'
-import ExperienceSection   from './components/ExperienceSection.vue'
-import ProjectsSection     from './components/ProjectsSection.vue'
-import EducationSection    from './components/EducationSection.vue'
-import CertificatesSection from './components/CertificatesSection.vue'
-import ContactSection      from './components/ContactSection.vue'
-import FooterSection       from './components/FooterSection.vue'
 
-const curtainOut = ref(false)
-const scrollPct  = ref(0)
-const cursorX = ref(-200)
-const cursorY = ref(-200)
-const orb1 = ref(null)
-const orb2 = ref(null)
+// Impor semua komponen halaman portofolio
+import PembukaTerminal         from './components/PembukaTerminal.vue'
+import NavBar                  from './components/NavBar.vue'
+import HeroSection             from './components/HeroSection.vue'
+import SkillsSection           from './components/SkillsSection.vue'
+import ProjectsSection         from './components/ProjectsSection.vue'
+import EducationSection        from './components/EducationSection.vue'
+import CertificatesSection     from './components/CertificatesSection.vue'
+import ContactSection          from './components/ContactSection.vue'
+import FooterSection           from './components/FooterSection.vue'
 
+// State variabel utama
+const showLoader = ref(true)     // Nentuin animasi terminal pembuka masih muncul atau nggak
+const curtainOut = ref(false)    // Efek tirai hitam pembuka layar
+const scrollPct  = ref(0)        // Persentase scroll halaman (buat progress bar di paling atas)
+const cursorX = ref(-200)        // Posisi X kursor mouse
+const cursorY = ref(-200)        // Posisi Y kursor mouse
+const orb1 = ref(null)           // Ref elemen dekorasi lingkaran biru 1
+const orb2 = ref(null)           // Ref elemen dekorasi lingkaran ungu 2
+
+// Dipanggil pas animasi terminal di PembukaTerminal.vue udah kelar
+function onLoaderFinish() {
+  showLoader.value = false
+  curtainOut.value = true
+}
+
+// Styling efek pendaran cahaya (glow) yang ngikutin pergerakan kursor
 const cursorGlowStyle = ref({
   transform: 'translate(-50%, -50%) translate3d(-200px, -200px, 0)',
   opacity: '0',
 })
 
+// Dipanggil tiap kali layar di-scroll
 function onScroll() {
+  // Hitung persentase scroll dari atas sampai bawah halaman
   const docH = document.documentElement.scrollHeight - window.innerHeight
   scrollPct.value = docH > 0 ? (window.scrollY / docH) * 100 : 0
 
-  // Subtle parallax for ambient orbs
+  // Efek paralaks halus buat dekorasi lingkaran background
   const y = window.scrollY || 0
   if (orb1.value) orb1.value.style.transform = `translate3d(0, ${y * 0.08}px, 0)`
   if (orb2.value) orb2.value.style.transform = `translate3d(0, ${-y * 0.06}px, 0)`
 }
 
+// Mengupdate posisi efek cahaya ngikutin kursor mouse
 function onPointerMove(event) {
   const x = `${(event.clientX / window.innerWidth) * 100}%`
   const y = `${(event.clientY / window.innerHeight) * 100}%`
@@ -75,15 +90,17 @@ function onPointerMove(event) {
   }
 }
 
+// Sembunyikan pendaran kursor pas mouse keluar dari layar
 function hideCursorGlow() {
   cursorGlowStyle.value.opacity = '0'
 }
 
+// Pasang event listener pas komponen pertama kali dimuat
 onMounted(() => {
-  setTimeout(() => { curtainOut.value = true }, 400)
   window.addEventListener('scroll', onScroll, { passive: true })
 })
 
+// Bersihin event listener pas komponen dilepas biar hemat memori
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
 })

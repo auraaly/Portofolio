@@ -1,17 +1,13 @@
 import { onMounted, onUnmounted } from 'vue'
 
-/**
- * useScrollReveal — attaches an IntersectionObserver to one or more element refs.
- * Each observed element gets `.visible` added when it enters the viewport.
- *
- * @param {Ref | Ref[]} targets  — single ref or array of refs pointing to DOM elements
- * @param {object}      options
- * @param {number}      options.threshold  — default 0.15
- */
+// Custom Composable untuk mendeteksi elemen saat masuk ke layar (scroll reveal)
+// Menambahkan class '.visible' ke elemen begitu muncul di layar browser
+
 export function useScrollReveal(targets, options = {}) {
   const { threshold = 0.15 } = options
   let observer = null
 
+  // Pasang IntersectionObserver saat komponen dipasang
   onMounted(() => {
     observer = new IntersectionObserver(
       (entries) => {
@@ -30,20 +26,13 @@ export function useScrollReveal(targets, options = {}) {
     })
   })
 
+  // Bersihkan pemantau saat komponen dicopot
   onUnmounted(() => {
     if (observer) observer.disconnect()
   })
 }
 
-/**
- * observeReveal — observe all elements matching a selector inside a root element.
- * Adds `.visible` class when they enter the viewport. Useful in component setup.
- *
- * @param {string} selector   — CSS selector for elements to reveal
- * @param {object} options
- * @param {number} options.threshold  — default 0.12
- * @param {boolean} options.once      — default true
- */
+// Fungsi utama memantau elemen berdasarkan selector CSS (misal: '.reveal-scale')
 export function observeReveal(selector, options = {}) {
   const { threshold = 0.12, once = true } = options
   let observer = null

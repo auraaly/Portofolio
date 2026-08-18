@@ -2,12 +2,10 @@
   <section id="skills" class="section-wrap">
     <div class="container">
 
-      <div class="skills-label reveal-scale">
-        <span class="label-comment">// kemampuan</span>
-        <div class="label-line"></div>
+      <div class="section-divider reveal-scale">
+        <span class="section-badge">Kemampuan</span>
+        <div class="divider-line"></div>
       </div>
-
-      <h2 class="skills-title reveal-scale d1">Kemampuan</h2>
 
       <div class="skills-body">
 
@@ -56,10 +54,13 @@
 </template>
 
 <script setup>
+// Fungsi pengamat animasi scroll saat elemen kemampuan muncul di layar
 import { observeReveal } from '../composables/useScrollReveal.js'
 
+// URL dasarcdn ikon devicon untuk mengambil logo teknologi secara otomatis
 const base = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 
+// Daftar keahlian bagian Frontend (tampilan depan)
 const frontendSkills = [
   { name: 'HTML5',      icon: `${base}/html5/html5-original.svg` },
   { name: 'CSS3',       icon: `${base}/css3/css3-original.svg` },
@@ -69,12 +70,14 @@ const frontendSkills = [
   { name: 'Tailwind',   icon: `${base}/tailwindcss/tailwindcss-original.svg` },
 ]
 
+// Daftar keahlian bagian Backend (pemrosesan data server)
 const backendSkills = [
   { name: 'PHP',     icon: `${base}/php/php-original.svg` },
   { name: 'MySQL',   icon: `${base}/mysql/mysql-original.svg` },
   { name: 'Node.js', icon: `${base}/nodejs/nodejs-original.svg` },
 ]
 
+// Daftar peralatan & tools pengembangan yang biasa digunakan
 const toolsSkills = [
   { name: 'Git',     icon: `${base}/git/git-original.svg` },
   { name: 'GitHub',  icon: `${base}/github/github-original-wordmark.svg`, invert: true },
@@ -82,6 +85,7 @@ const toolsSkills = [
   { name: 'Figma',   icon: `${base}/figma/figma-original.svg` },
 ]
 
+// Aktifkan pemantau animasi scroll pada seksi kemampuan ini
 observeReveal('#skills .reveal-scale', { threshold: 0.1 })
 </script>
 

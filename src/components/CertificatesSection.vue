@@ -2,24 +2,19 @@
   <section id="certificates" class="section-wrap">
     <div class="container">
 
-      <!-- Label -->
-      <div class="section-label reveal-rotate">
-        <span class="label-comment">// achievements</span>
-        <div class="label-line"></div>
+      <div class="section-divider reveal-rotate">
+        <span class="section-badge">Sertifikat</span>
+        <div class="divider-line"></div>
       </div>
-
-      <h2 class="section-heading reveal-rotate d1">Sertifikat.</h2>
 
       <!-- Certificate cards -->
       <div class="certs-grid">
         <div
           v-for="(cert, i) in certs"
           :key="cert.title"
-          class="cert-card reveal-rotate spotlight"
+          class="cert-card reveal-rotate"
           :class="`d${i + 2}`"
           :style="{ '--gc': cert.glowColor }"
-          @mousemove="moveSpotlight"
-          @mouseleave="resetSpotlight"
         >
           <!-- Gradient glow border -->
           <div class="cert-glow" :style="{ '--gc': cert.glowColor }"></div>
@@ -60,27 +55,14 @@ const certs = [
     link: '',
   },
   {
-    issuer: 'DBS Foundation · Coding Camp 2026',
+    issuer: 'DBS Foundation Coding Camp 2026',
     title: 'Full Stack Web Developer',
-    desc: 'Menyelesaikan program Coding Camp intensif — mencakup pengembangan frontend, backend, database, hingga deployment proyek web secara nyata bersama tim.',
+    desc: 'Menyelesaikan program Coding Camp intensif mencakup pengembangan frontend, backend, database, hingga deployment proyek web secara nyata bersama tim.',
     year: '2026',
     glowColor: '#38bdf8',
     link: '',
   },
 ]
-
-function moveSpotlight(e) {
-  const card = e.currentTarget
-  const rect = card.getBoundingClientRect()
-  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-}
-
-function resetSpotlight(e) {
-  const card = e.currentTarget
-  card.style.setProperty('--mouse-x', '50%')
-  card.style.setProperty('--mouse-y', '50%')
-}
 
 observeReveal('#certificates .reveal-rotate', { threshold: 0.12 })
 </script>

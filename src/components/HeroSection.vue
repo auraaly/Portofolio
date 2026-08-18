@@ -8,7 +8,7 @@
           <p class="hello-text entrance" style="--entrance-delay: 0.05s">Halo, saya</p>
           <h1 class="hero-name entrance" style="--entrance-delay: 0.15s">Aura Amalia</h1>
           <p class="hero-tagline entrance" style="--entrance-delay: 0.4s">
-            <span class="typing-text">{{ typedTagline }}</span><span class="typing-cursor" v-if="showCursor">|</span>
+            <span class="typing-text">Junior Web Developer</span>
           </p>
         </div>
 
@@ -63,32 +63,11 @@ import profileImg from '/aurabd.jpeg'
 const pillsRef = ref(null)
 const scrollHint = ref(null)
 
-const tagline = 'Junior Web Developer'
-const typedTagline = ref('')
-const showCursor = ref(true)
-
-function runTyping() {
-  let i = 0
-  const typeInterval = setInterval(() => {
-    typedTagline.value = tagline.slice(0, i + 1)
-    i++
-    if (i >= tagline.length) {
-      clearInterval(typeInterval)
-      setTimeout(() => {
-        const blink = setInterval(() => { showCursor.value = !showCursor.value }, 500)
-        setTimeout(() => clearInterval(blink), 3000)
-      }, 500)
-    }
-  }, 60)
-}
-
 onMounted(() => {
   requestAnimationFrame(() => {
     document.querySelectorAll('.entrance').forEach((el) => el.classList.add('visible'))
     if (pillsRef.value) pillsRef.value.classList.add('visible')
   })
-
-  setTimeout(runTyping, 600)
 
   const onScroll = () => {
     if (scrollHint.value) {
