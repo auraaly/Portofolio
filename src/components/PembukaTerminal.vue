@@ -104,18 +104,21 @@ function mulaiJalankanServer() {
 }
 
 function selesaiLoading() {
+  tampilkanLayar.value = false
   setTimeout(() => {
-    tampilkanLayar.value = false
     document.body.style.overflow = ''
     emit('finish')
-  }, 600)
+  }, 850)
 }
 </script>
 
 <style scoped>
 .terminal-loader-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 999999;
   background-color: #0a1628;
   display: flex;
@@ -123,6 +126,7 @@ function selesaiLoading() {
   justify-content: center;
   overflow: hidden;
   font-family: 'DM Mono', 'Fira Code', monospace;
+  will-change: transform;
 }
 
 /* Ambient glow matching background */
@@ -147,7 +151,6 @@ function selesaiLoading() {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.2);
   overflow: hidden;
   position: relative;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
 }
 
 /* Header */
@@ -280,12 +283,11 @@ function selesaiLoading() {
   transition: width 0.03s linear;
 }
 
-/* Overlay Transition — Slide Up Like a Modern Curtain */
+/* Animasi Tirai Layar Terminal Meluncur Penuh ke Atas */
 .terminal-fade-leave-active {
-  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1) !important;
 }
 .terminal-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-100%) !important;
 }
 </style>

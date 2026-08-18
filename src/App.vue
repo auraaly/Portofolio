@@ -5,9 +5,6 @@
   <!-- Scroll progress bar -->
   <div id="scroll-progress" :style="{ width: scrollPct + '%' }"></div>
 
-  <!-- Page curtain -->
-  <div class="curtain" :class="{ out: curtainOut }"></div>
-
   <!-- Ambient orbs -->
   <div class="ambient ambient-one" ref="orb1"></div>
   <div class="ambient ambient-two" ref="orb2"></div>
@@ -44,7 +41,6 @@ import FooterSection           from './components/FooterSection.vue'
 
 // State variabel utama
 const showLoader = ref(true)     // Nentuin animasi terminal pembuka masih muncul atau nggak
-const curtainOut = ref(false)    // Efek tirai hitam pembuka layar
 const scrollPct  = ref(0)        // Persentase scroll halaman (buat progress bar di paling atas)
 const cursorX = ref(-200)        // Posisi X kursor mouse
 const cursorY = ref(-200)        // Posisi Y kursor mouse
@@ -54,7 +50,6 @@ const orb2 = ref(null)           // Ref elemen dekorasi lingkaran ungu 2
 // Dipanggil pas animasi terminal di PembukaTerminal.vue udah kelar
 function onLoaderFinish() {
   showLoader.value = false
-  curtainOut.value = true
 }
 
 // Styling efek pendaran cahaya (glow) yang ngikutin pergerakan kursor
@@ -107,7 +102,20 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* Curtain */
+/* Animasi Halaman Meluncur Naik saat Terminal Selesai */
+.page-content-wrapper {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.page-content-wrapper.page-slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tirai loading fullscreen */
 .curtain {
   position: fixed;
   inset: 0;
@@ -119,6 +127,7 @@ onUnmounted(() => {
 }
 .curtain.out { opacity: 0; }
 
+/* Bola blur di background */
 .ambient {
   position: fixed;
   width: 34rem;
@@ -134,12 +143,13 @@ onUnmounted(() => {
 .ambient-one { top: 8%; right: -15rem; background: #38bdf8; }
 .ambient-two { bottom: 6%; left: -14rem; background: #a78bfa; animation-delay: -7s; }
 
+/* Animasi drift buat orbs */
 @keyframes drift {
   from { transform: translate3d(0, 0, 0) scale(0.9); }
   to { transform: translate3d(-4rem, 3rem, 0) scale(1.12); }
 }
 
-/* Cursor glow */
+/* Glow ungu yang ngikutin cursor */
 .cursor-glow {
   position: fixed;
   top: 0;
@@ -154,6 +164,7 @@ onUnmounted(() => {
   mix-blend-mode: screen;
 }
 
+/* Hide di touch device (mobile/tablet) */
 @media (pointer: coarse) {
   .cursor-glow { display: none; }
 }
