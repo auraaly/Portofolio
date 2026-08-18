@@ -40,7 +40,7 @@
                 <span class="check">✔</span> Build selesai dalam 340ms
               </div>
               <div class="log-item info-link fade-in-step" v-if="tahapServer >= 3">
-                <span class="arrow">➜</span> URL: <span class="link">https://portofolio-aura.vercel.app/</span>
+                <span class="arrow">➜</span> Output: <span class="link">dist/index.html</span>
               </div>
             </div>
           </div>
