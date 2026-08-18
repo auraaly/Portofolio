@@ -280,12 +280,12 @@ function selesaiLoading() {
   transition: width 0.03s linear;
 }
 
-/* Overlay Transition */
+/* Overlay Transition — Slide Up Like a Modern Curtain */
 .terminal-fade-leave-active {
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.75s cubic-bezier(0.77, 0, 0.175, 1);
 }
 .terminal-fade-leave-to {
   opacity: 0;
-  transform: scale(1.05);
+  transform: translateY(-100%);
 }
 </style>
