@@ -66,7 +66,7 @@ const tampilkanLog   = ref(false)
 const tahapServer    = ref(1)
 const nilaiProgress  = ref(0)
 
-const perintah = 'npm run dev'
+const perintah = 'npm run build'
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
