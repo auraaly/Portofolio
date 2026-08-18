@@ -2,7 +2,7 @@
   <header class="nav" :class="{ scrolled, hidden: navHidden }">
     <div class="nav-inner container">
 
-      <!-- Desktop links -->
+      <!-- Link navigasi untuk layar desktop -->
       <nav class="nav-links" role="navigation">
         <a
           v-for="l in links"
@@ -15,7 +15,7 @@
         </a>
       </nav>
 
-      <!-- Theme toggle -->
+      <!-- Tombol ganti tema (dark mode / light mode) -->
       <button
         class="theme-toggle"
         aria-label="Toggle dark mode"
@@ -37,7 +37,7 @@
         </svg>
       </button>
 
-      <!-- Hamburger -->
+      <!-- Tombol hamburger menu untuk mobile -->
       <button
         class="burger"
         :class="{ open: menuOpen }"
@@ -49,7 +49,7 @@
       </button>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Menu dropdown untuk versi mobile -->
     <div class="mobile-menu" :class="{ open: menuOpen }">
       <a
         v-for="l in links"
@@ -67,15 +67,17 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const scrolled  = ref(false)
-const navHidden = ref(false)
-const menuOpen  = ref(false)
-const active    = ref('hero')
-let lastY = 0
+// State untuk UI navbar
+const scrolled  = ref(false)  // Navbar jadi transparan atau opaque
+const navHidden = ref(false)  // Navbar disembunyiin pas scroll ke bawah
+const menuOpen  = ref(false)  // Menu mobile dibuka atau ditutup
+const active    = ref('hero') // Section mana yang lagi aktif
+let lastY = 0                 // Posisi scroll terakhir buat deteksi arah scroll
 
+// State untuk dark mode
 const isDark = ref(true)
 
-// Fungsi untuk menerapkan tema gelap atau terang ke dokumen HTML & localStorage
+// Terapin tema (dark atau light) ke halaman dan simpan di localStorage
 function applyTheme(dark) {
   isDark.value = dark
   if (dark) {
@@ -87,18 +89,19 @@ function applyTheme(dark) {
   }
 }
 
-// Fungsi untuk mengganti tema (toggle) saat tombol bulan/matahari diklik
+// Ganti tema pas tombol bulan/matahari diklik
 function toggleTheme() {
   applyTheme(!isDark.value)
 }
 
-// Fungsi untuk mengecek tema yang tersimpan di memori browser saat pertama kali dibuka
+// Load tema yang disimpan di browser pas pertama kali buka
 function initTheme() {
   const saved = localStorage.getItem('theme')
   if (saved === 'light') applyTheme(false)
   else applyTheme(true)
 }
 
+// Daftar link menu navigasi
 const links = [
   { id: 'hero',         label: 'Beranda'    },
   { id: 'skills',       label: 'Kemampuan'  },
@@ -108,33 +111,42 @@ const links = [
   { id: 'contact',      label: 'Kontak'     },
 ]
 
-// Daftar ID seksi yang aktif di halaman
+// Daftar ID section untuk deteksi active menu
 const sections = ['hero','skills','projects','education','certificates','contact']
 
-// Fungsi untuk memantau scroll layar (mengubah style navbar & menandai menu aktif)
+// Fungsi yang jalan tiap kali user scroll
 function onScroll() {
   const y = window.scrollY
+  
+  // Navbar jadi opaque pas scroll lebih dari 40px
   scrolled.value  = y > 40
+  
+  // Hide navbar pas scroll ke bawah cepat
   navHidden.value = y > 200 && y > lastY + 8
+  
+  // Show navbar lagi pas scroll ke atas atau di bagian atas halaman
   if (y < lastY - 5 || y < 200) navHidden.value = false
   lastY = y
 
-  // Menentukan menu navigasi mana yang sedang aktif sesuai posisi scroll
+  // Deteksi section mana yang lagi keliatan di layar, buat highlight menu
   const pos = y + 140
   for (let i = sections.length - 1; i >= 0; i--) {
     const el = document.getElementById(sections[i])
-    if (el && el.offsetTop <= pos) { active.value = sections[i]; break }
+    if (el && el.offsetTop <= pos) { 
+      active.value = sections[i]
+      break 
+    }
   }
 }
 
-// Mengaktifkan pemantauan scroll saat komponen dipasang di layar
+// Setup listener scroll pas component mount
 onMounted(() => {
   lastY = window.scrollY
   initTheme()
   window.addEventListener('scroll', onScroll, { passive: true })
 })
 
-// Membersihkan pemantauan scroll saat berpindah halaman agar tidak boros memori
+// Bersihin listener pas component unmount
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 

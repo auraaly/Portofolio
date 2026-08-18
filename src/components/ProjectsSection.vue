@@ -2,29 +2,31 @@
   <section id="projects" class="section-wrap">
     <div class="container">
 
+      <!-- Badge dan garis pembatas section -->
       <div class="section-divider">
         <span class="section-badge">Proyek Pilihan</span>
         <div class="divider-line"></div>
       </div>
 
+      <!-- Grid kartu proyek -->
       <div class="projects-grid">
         <div
           v-for="p in projects"
           :key="p.slug"
           class="project-card"
         >
-          <!-- Gambar Proyek -->
+          <!-- Gambar preview proyek dengan badge -->
           <div class="project-img-box">
             <img :src="p.thumb" :alt="p.title" class="project-img" />
             <span class="project-badge">{{ p.badge }}</span>
           </div>
 
-          <!-- Konten Detail Proyek -->
+          <!-- Konten detail proyek -->
           <div class="project-content">
             <h3 class="project-title">{{ p.title }}</h3>
             <p class="project-desc">{{ p.desc }}</p>
 
-            <!-- Fitur Utama -->
+            <!-- List fitur utama proyek -->
             <ul class="project-bullets">
               <li v-for="b in p.bullets" :key="b" class="bullet-item">
                 <span class="bullet-dot">•</span>
@@ -32,6 +34,7 @@
               </li>
             </ul>
 
+            <!-- Tag teknologi yang dipakai -->
             <div class="project-tech-tags">
               <span v-for="t in p.tech" :key="t.name" class="tech-tag">
                 {{ t.name }}
@@ -47,16 +50,18 @@
 
 <script setup>
 import { ref } from 'vue'
-// Fungsi pengamat animasi scroll saat proyek muncul di layar
+// Import fungsi buat animasi reveal pas scroll
 import { observeReveal } from '../composables/useScrollReveal.js'
 
+// Index proyek yang lagi dibuka (null kalau semua ditutup)
 const active = ref(null)
 
+// Fungsi buat toggle expand/collapse proyek
 function toggle(i) {
   active.value = active.value === i ? null : i
 }
 
-// Array daftar proyek buatan kamu (berisi judul, gambar, deskripsi, dan teknologi yang dipakai)
+// Data proyek yang pernah dikerjain
 const projects = [
   {
     slug: 'ekskul',
@@ -123,17 +128,19 @@ const projects = [
   },
 ]
 
-// Aktifkan pengamat animasi scroll pada kartu proyek
+// Aktifin animasi reveal pas card proyek masuk ke viewport
 observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.1 })
 </script>
 
 <style scoped>
+/* Grid 3 kolom untuk kartu proyek */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
+/* Kartu proyek dengan efek hover */
 .project-card {
   background: #102035;
   border: 1px solid #223a5e;
@@ -144,12 +151,14 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Hover: angkat card dikit dan ubah border jadi biru */
 .project-card:hover {
   transform: translateY(-5px);
   border-color: #38bdf8;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
+/* Container gambar proyek */
 .project-img-box {
   position: relative;
   width: 100%;
@@ -162,6 +171,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   justify-content: center;
 }
 
+/* Gambar proyek */
 .project-img {
   width: 100%;
   height: 100%;
@@ -171,10 +181,12 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   transition: transform 0.3s ease;
 }
 
+/* Zoom in dikit pas hover */
 .project-card:hover .project-img {
   transform: scale(1.03);
 }
 
+/* Badge bahasa pemrograman (PHP, JS, dll) */
 .project-badge {
   position: absolute;
   top: 8px;
@@ -189,6 +201,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   border-radius: 20px;
 }
 
+/* Konten teks di bawah gambar */
 .project-content {
   padding: 20px;
   display: flex;
@@ -196,6 +209,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   flex: 1;
 }
 
+/* Judul proyek */
 .project-title {
   font-family: var(--display);
   font-size: 1.2rem;
@@ -204,6 +218,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   margin-bottom: 8px;
 }
 
+/* Deskripsi singkat proyek */
 .project-desc {
   font-size: 0.88rem;
   color: #cbd5e1;
@@ -211,6 +226,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   margin-bottom: 12px;
 }
 
+/* List fitur utama */
 .project-bullets {
   display: flex;
   flex-direction: column;
@@ -220,6 +236,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   padding: 0;
 }
 
+/* Item fitur dengan dot biru */
 .bullet-item {
   display: flex;
   align-items: flex-start;
@@ -234,6 +251,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   font-weight: bold;
 }
 
+/* Container chip teknologi */
 .project-tech-tags {
   display: flex;
   flex-wrap: wrap;
@@ -242,6 +260,7 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   margin-top: auto;
 }
 
+/* Chip teknologi individual */
 .tech-tag {
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -252,12 +271,10 @@ observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.
   border-radius: 6px;
 }
 
+/* Responsive: 1 kolom di mobile */
 @media (max-width: 768px) {
-  .proj-item-header { padding: 20px; }
-  .proj-body-inner { grid-template-columns: 1fr; }
-  .proj-img-wrap { border-right: none; border-bottom: 1px solid var(--border); }
-  .proj-img { min-height: 200px; max-height: 220px; }
-  .proj-detail { padding: 24px 20px; }
-  .proj-type-badge { display: none; }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
