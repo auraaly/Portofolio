@@ -31,16 +31,16 @@
             <!-- Execution Logs -->
             <div class="logs" v-if="tampilkanLog">
               <div class="log-item info-step fade-in-step">
-                <span class="step-num">[1/3]</span> Memulai server portofolio...
+                <span class="step-num">[1/3]</span> Memulai proses build...
               </div>
               <div class="log-item info-step fade-in-step" v-if="tahapServer >= 2">
-                <span class="step-num">[2/3]</span> Menyusun modul Vue...
+                <span class="step-num">[2/3]</span> Mengompilasi modul Vue...
               </div>
               <div class="log-item success-step fade-in-step" v-if="tahapServer >= 3">
-                <span class="check">✔</span> Server siap dalam 340ms
+                <span class="check">✔</span> Build selesai dalam 340ms
               </div>
               <div class="log-item info-link fade-in-step" v-if="tahapServer >= 3">
-                <span class="arrow">➜</span> Lokal: <span class="link">http://localhost:5173/</span>
+                <span class="arrow">➜</span> URL: <span class="link">https://portofolio-aura.vercel.app/</span>
               </div>
             </div>
           </div>
