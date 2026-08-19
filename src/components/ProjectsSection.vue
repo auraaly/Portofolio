@@ -49,16 +49,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-// Index proyek yang lagi dibuka (null kalau semua ditutup)
-const active = ref(null)
-
-// Fungsi buat toggle expand/collapse proyek
-function toggle(i) {
-  active.value = active.value === i ? null : i
-}
-
 // Data proyek yang pernah dikerjain
 const projects = [
   {

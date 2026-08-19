@@ -3,7 +3,7 @@
    Semua CSS digabung di sini
    ============================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 /* ── Variables ── */
 :root {
@@ -27,9 +27,9 @@
   --tf:       0.18s ease;
   --tb:       0.32s ease;
   --ts:       0.6s cubic-bezier(0.16,1,0.3,1);
-  --font:     'Manrope', system-ui, sans-serif;
-  --display:  'Space Grotesk', system-ui, sans-serif;
-  --mono:     'DM Mono', 'Fira Code', monospace;
+  --font:     'Plus Jakarta Sans', system-ui, sans-serif;
+  --display:  'Outfit', system-ui, sans-serif;
+  --mono:     'Fira Code', monospace;
   --r-sm:     6px;
   --r-md:     12px;
   --r-lg:     18px;
@@ -72,6 +72,28 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   transition: background 0.6s ease;
+}
+
+/* Latar polos agar konten menjadi fokus utama. */
+#hero,
+#skills,
+#projects,
+#education,
+#certificates,
+#contact {
+  background: var(--bg);
+}
+
+#hero::before,
+#hero::after,
+#skills::before,
+#skills::after,
+#projects::before,
+#projects::after,
+#education::before,
+#certificates::before,
+#contact::before {
+  display: none;
 }
 
 @keyframes grid-pan {
@@ -315,8 +337,8 @@ body {
 }
 .section-badge {
   font-family: var(--display);
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 1.7rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--t1);
   background: transparent;
@@ -324,6 +346,7 @@ body {
   padding: 0;
   white-space: nowrap;
   box-shadow: none;
+  line-height: 1;
 }
 .divider-line {
   flex: 1;
@@ -334,120 +357,7 @@ body {
 @media (max-width: 768px) { .container { padding: 0 20px; } }
 
 /* Scroll reveal utilities — Sederhana & Clean */
-.reveal,
-.reveal-up {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal.visible,
-.reveal-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Delay helpers */
-.d1 { transition-delay: 0.05s; }
-.d2 { transition-delay: 0.10s; }
-.d3 { transition-delay: 0.15s; }
-.d4 { transition-delay: 0.20s; }
-.d5 { transition-delay: 0.25s; }
-.d6 { transition-delay: 0.30s; }
-.no-reveal { opacity: 1; transform: none; transition: none; }
-
-/* Variasi reveal sederhana */
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal-right.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.reveal-scale.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.reveal-rotate {
-  opacity: 0;
-  transform: translateY(40px) rotateX(15deg);
-  transform-origin: center top;
-  filter: blur(8px);
-  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
-              transform 0.85s cubic-bezier(0.16,1,0.3,1),
-              filter 0.85s cubic-bezier(0.16,1,0.3,1);
-  will-change: transform, opacity, filter;
-}
-.reveal-rotate.visible {
-  opacity: 1;
-  transform: translateY(0) rotateX(0deg);
-  filter: blur(0);
-}
-
-.reveal-pop {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.6s cubic-bezier(0.34,1.56,0.64,1),
-              transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
-  will-change: transform, opacity;
-}
-.reveal-pop.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Flip-in reveal for headings or hero moments */
-.reveal-flip {
-  opacity: 0;
-  transform: perspective(900px) rotateX(-35deg) translateY(30px);
-  transform-origin: center top;
-  filter: blur(6px);
-  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
-              transform 0.85s cubic-bezier(0.16,1,0.3,1),
-              filter 0.85s cubic-bezier(0.16,1,0.3,1);
-  will-change: transform, opacity, filter;
-}
-.reveal-flip.visible {
-  opacity: 1;
-  transform: perspective(900px) rotateX(0deg) translateY(0);
-  filter: blur(0);
-}
-
 /* Stagger children utilities */
-.stagger-children > * {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
-              transform 0.55s cubic-bezier(0.16,1,0.3,1),
-              filter 0.55s cubic-bezier(0.16,1,0.3,1);
-}
-.stagger-children.visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
-.stagger-children.visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.06s; }
-.stagger-children.visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
-.stagger-children.visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
-.stagger-children.visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
-.stagger-children.visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.30s; }
-.stagger-children.visible > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
-.stagger-children.visible > *:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 0.42s; }
-
 /* Spotlight hover effect for cards */
 .spotlight {
   position: relative;
@@ -548,10 +458,6 @@ main > section:not(:first-child) { position: relative; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes photo-sheen { 0%, 58% { translate: -120% 0; opacity: 0; } 68% { opacity: 0.9; } 82%, 100% { translate: 470% 0; opacity: 0; } }
-@keyframes reveal-up { from { opacity: 0; transform: translateY(36px) scale(0.96); filter: blur(8px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
-@keyframes reveal-left { from { opacity: 0; transform: translateX(-40px); filter: blur(6px); } to { opacity: 1; transform: translateX(0); filter: blur(0); } }
-@keyframes reveal-right { from { opacity: 0; transform: translateX(40px); filter: blur(6px); } to { opacity: 1; transform: translateX(0); filter: blur(0); } }
-@keyframes reveal-scale { from { opacity: 0; transform: scale(0.88); filter: blur(10px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
 @keyframes gradient-rotate { 0% { --angle: 0deg; } 100% { --angle: 360deg; } }
 @keyframes border-dance { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes cursor-pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 0.3; } }
@@ -705,13 +611,13 @@ main > section:not(:first-child) { position: relative; }
 }
 .hero-left { display: flex; flex-direction: column; gap: 24px; }
 .hero-heading { line-height: 1.1; }
-.hello-text { font-size: 1.1rem; color: var(--t2); font-weight: 400; margin-bottom: 4px; }
+.hello-text { font-size: 0.85rem; color: var(--t2); font-weight: 500; margin-bottom: 8px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--mono); }
 .hero-name {
   font-family: var(--display);
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   margin-bottom: 12px;
   background: linear-gradient(135deg, var(--blue-b) 0%, var(--blue) 40%, var(--purple) 100%);
   -webkit-background-clip: text;
@@ -1073,9 +979,9 @@ main > section:not(:first-child) { position: relative; }
 
 .skills-title {
   font-family: var(--display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--t1);
   margin-bottom: 52px;
 }
@@ -1231,7 +1137,7 @@ main > section:not(:first-child) { position: relative; }
   border-radius: 99px; white-space: nowrap;
 }
 .exp-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start; }
-.exp-heading { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; color: var(--t1); margin-bottom: 16px; }
+.exp-heading { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--t1); margin-bottom: 16px; }
 .heading-blue { background: linear-gradient(135deg, var(--blue), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .exp-sub { font-size: 0.9rem; color: var(--t2); line-height: 1.75; }
 .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; transition: border-color var(--tb), box-shadow var(--tb); }
@@ -1260,7 +1166,7 @@ main > section:not(:first-child) { position: relative; }
 #projects .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 #projects .label-comment { font-family: var(--mono); font-size: 0.88rem; color: var(--purple); white-space: nowrap; }
 #projects .label-line { flex: 1; height: 1px; background: var(--border); }
-.section-heading { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; color: var(--t1); letter-spacing: -0.03em; margin-bottom: 48px; }
+.section-heading { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; color: var(--t1); letter-spacing: -0.02em; margin-bottom: 48px; }
 .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
 .project-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; transition: border-color var(--tb), transform var(--tb), box-shadow var(--tb); }
 .project-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(56,189,248,0.12); }
@@ -1486,3 +1392,15 @@ main > section:not(:first-child) { position: relative; }
 .fb-vue { color: var(--green); font-family: var(--mono); }
 .fb-vite { color: var(--purple); font-family: var(--mono); }
 @media (max-width: 700px) { .footer-main { flex-direction: column; gap: 32px; } }
+
+/* Variasi latar antarbagian, tetap polos dan nyaman dibaca. */
+#hero { background: #0b1d33; }
+#skills { background: #0d2139; }
+#projects { background: #0b1e35; }
+#education { background: #0e243d; }
+#certificates { background: #0c2038; }
+#contact { background: #0f2741; }
+
+.section-wrap {
+  border-top: 1px solid rgba(125, 211, 252, 0.18);
+}
