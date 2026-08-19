@@ -775,31 +775,20 @@ main > section:not(:first-child) { position: relative; }
   width: clamp(220px, 30vw, 320px);
   height: clamp(290px, 36vw, 420px);
   padding: 8px;
-  border-radius: 30px 30px 88px 30px;
+  border-radius: 20px;
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(125,211,252,0.95), rgba(56,189,248,0.3) 42%, rgba(167,139,250,0.72));
-  border: 1px solid rgba(186,230,253,0.65);
-  box-shadow: 0 18px 45px rgba(8,47,73,0.42), 10px 12px 0 rgba(56,189,248,0.12);
+  background: var(--surface);
+  border: 1px solid var(--border-b);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 .glass-frame::before {
   content: '';
   position: absolute;
   inset: 8px;
-  border-radius: 23px 23px 80px 23px;
-  border: 1px solid rgba(255,255,255,0.44);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 2;
   pointer-events: none;
-}
-.glass-frame::after {
-  content: '';
-  position: absolute;
-  top: -55%; left: -30%;
-  width: 30%; height: 210%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
-  transform: rotate(18deg);
-  z-index: 3;
-  pointer-events: none;
-  animation: photo-sheen 6s ease-in-out infinite;
 }
 .hero-img {
   position: absolute;
