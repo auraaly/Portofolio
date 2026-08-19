@@ -50,8 +50,6 @@
 
 <script setup>
 import { ref } from 'vue'
-// Import fungsi buat animasi reveal pas scroll
-import { observeReveal } from '../composables/useScrollReveal.js'
 
 // Index proyek yang lagi dibuka (null kalau semua ditutup)
 const active = ref(null)
@@ -128,8 +126,6 @@ const projects = [
   },
 ]
 
-// Aktifin animasi reveal pas card proyek masuk ke viewport
-observeReveal('#projects .reveal-right, #projects .reveal-left', { threshold: 0.1 })
 </script>
 
 <style scoped>

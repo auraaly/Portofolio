@@ -2,14 +2,14 @@
   <section id="skills" class="section-wrap">
     <div class="container">
 
-      <div class="section-divider reveal-scale">
+      <div class="section-divider">
         <span class="section-badge">Kemampuan</span>
         <div class="divider-line"></div>
       </div>
 
       <div class="skills-body">
 
-        <div class="skills-group reveal-scale d2">
+        <div class="skills-group">
           <div class="group-label">
             <span class="group-dot dot-red"></span>
             Frontend
@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <div class="skills-group reveal-scale d3">
+        <div class="skills-group">
           <div class="group-label">
             <span class="group-dot dot-purple"></span>
             Backend
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="skills-group reveal-scale d4">
+        <div class="skills-group">
           <div class="group-label">
             <span class="group-dot dot-green"></span>
             Tools
@@ -54,9 +54,6 @@
 </template>
 
 <script setup>
-// Fungsi pengamat animasi scroll saat elemen kemampuan muncul di layar
-import { observeReveal } from '../composables/useScrollReveal.js'
-
 // URL dasarcdn ikon devicon untuk mengambil logo teknologi secara otomatis
 const base = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 
@@ -85,8 +82,6 @@ const toolsSkills = [
   { name: 'Figma',   icon: `${base}/figma/figma-original.svg` },
 ]
 
-// Aktifkan pemantau animasi scroll pada seksi kemampuan ini
-observeReveal('#skills .reveal-scale', { threshold: 0.1 })
 </script>
 
 <style scoped>

@@ -3,7 +3,7 @@
     <div class="container">
 
       <!-- Badge section -->
-      <div class="section-divider reveal-rotate">
+      <div class="section-divider">
         <span class="section-badge">Sertifikat</span>
         <div class="divider-line"></div>
       </div>
@@ -13,8 +13,7 @@
         <div
           v-for="(cert, i) in certs"
           :key="cert.title"
-          class="cert-card reveal-rotate"
-          :class="`d${i + 2}`"
+          class="cert-card"
           :style="{ '--gc': cert.glowColor }"
         >
           <!-- Border glow berwarna (orange/biru) -->
@@ -45,9 +44,6 @@
 </template>
 
 <script setup>
-// Import fungsi untuk animasi scroll reveal
-import { observeReveal } from '../composables/useScrollReveal.js'
-
 // Data sertifikat yang udah didapet
 const certs = [
   {
@@ -68,8 +64,6 @@ const certs = [
   },
 ]
 
-// Aktifin animasi pas card sertifikat masuk ke layar
-observeReveal('#certificates .reveal-rotate', { threshold: 0.12 })
 </script>
 
 <style scoped>

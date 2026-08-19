@@ -3,13 +3,13 @@
     <div class="container">
 
       <!-- Badge judul section -->
-      <div class="section-divider reveal-left">
+      <div class="section-divider">
         <span class="section-badge">Pendidikan</span>
         <div class="divider-line"></div>
       </div>
 
       <!-- Layout timeline centered -->
-      <div class="edu-layout reveal-right d1">
+      <div class="edu-layout">
         <div class="edu-timeline">
           <!-- Garis vertical timeline -->
           <div class="edu-timeline-line"></div>
@@ -48,14 +48,6 @@
     </div>
   </section>
 </template>
-
-<script setup>
-// Import fungsi untuk animasi scroll reveal
-import { observeReveal } from '../composables/useScrollReveal.js'
-
-// Aktifkan animasi pas section education masuk ke layar
-observeReveal('#education .reveal-left, #education .reveal-right', { threshold: 0.1 })
-</script>
 
 <style scoped>
 .edu-header { margin-bottom: 48px; }
