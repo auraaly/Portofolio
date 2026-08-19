@@ -15,16 +15,6 @@
         </a>
       </nav>
 
-      <!-- Tombol ganti tema (dark mode / light mode) -->
-      <button
-        class="theme-toggle"
-        aria-label="Toggle dark mode"
-        @click="toggleTheme"
-      >
-        <span v-if="isDark" class="theme-text">Mode Gelap</span>
-        <span v-else class="theme-text">Mode Terang</span>
-      </button>
-
       <!-- Tombol hamburger menu untuk mobile -->
       <button
         class="burger"
@@ -61,33 +51,6 @@ const navHidden = ref(false)  // Navbar disembunyiin pas scroll ke bawah
 const menuOpen  = ref(false)  // Menu mobile dibuka atau ditutup
 const active    = ref('hero') // Section mana yang lagi aktif
 let lastY = 0                 // Posisi scroll terakhir buat deteksi arah scroll
-
-// State untuk dark mode
-const isDark = ref(true)
-
-// Terapin tema (dark atau light) ke halaman dan simpan di localStorage
-function applyTheme(dark) {
-  isDark.value = dark
-  if (dark) {
-    document.documentElement.removeAttribute('data-theme')
-    localStorage.setItem('theme', 'dark')
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light')
-    localStorage.setItem('theme', 'light')
-  }
-}
-
-// Ganti tema pas tombol bulan/matahari diklik
-function toggleTheme() {
-  applyTheme(!isDark.value)
-}
-
-// Load tema yang disimpan di browser pas pertama kali buka
-function initTheme() {
-  const saved = localStorage.getItem('theme')
-  if (saved === 'light') applyTheme(false)
-  else applyTheme(true)
-}
 
 // Daftar link menu navigasi
 const links = [
@@ -130,7 +93,6 @@ function onScroll() {
 // Setup listener scroll pas component mount
 onMounted(() => {
   lastY = window.scrollY
-  initTheme()
   window.addEventListener('scroll', onScroll, { passive: true })
 })
 
