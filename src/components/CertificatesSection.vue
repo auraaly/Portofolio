@@ -14,11 +14,7 @@
           v-for="(cert, i) in certs"
           :key="cert.title"
           class="cert-card"
-          :style="{ '--gc': cert.glowColor }"
         >
-          <!-- Border glow berwarna (orange/biru) -->
-          <div class="cert-glow" :style="{ '--gc': cert.glowColor }"></div>
-
           <!-- Judul sertifikat -->
           <h3 class="cert-title">{{ cert.title }}</h3>
           

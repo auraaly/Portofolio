@@ -1,5 +1,5 @@
 <template>
-  <!-- Scroll progress bar -->
+  <!-- Progress bar tipis di atas -->
   <div id="scroll-progress" :style="{ width: scrollPct + '%' }"></div>
 
   <NavBar />

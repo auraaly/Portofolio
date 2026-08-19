@@ -38,16 +38,11 @@
         </div>
       </div>
 
-      <!-- Bagian kanan: Foto dan tech pills -->
+      <!-- Bagian kanan: Foto -->
       <div class="hero-right entrance" style="--entrance-delay: 0.3s">
-        <!-- Frame foto dengan efek glass morphism -->
+        <!-- Frame foto -->
         <div class="glass-frame">
           <img :src="profileImg" alt="Aura Amalia" class="hero-img" />
-        </div>
-
-        <!-- Chip teknologi yang dikuasai -->
-        <div class="tech-pills" ref="pillsRef">
-          <span v-for="t in techPills" :key="t" class="tech-pill">{{ t }}</span>
         </div>
       </div>
 
