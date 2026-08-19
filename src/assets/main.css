@@ -1,10 +1,6 @@
-/* ==============================================
-   MAIN.CSS — Aura Amalia Portfolio
-   ============================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-/* ── Variables ── */
+/* ── Variabel ── */
 :root {
   --bg:       #0d1b2e;
   --surface:  #111f33;
@@ -34,7 +30,7 @@
   --r-lg:     16px;
 }
 
-/* Light mode variables */
+/* Variabel mode terang */
 [data-theme="light"] {
   --bg:       #f0f6ff;
   --surface:  #ffffff;
@@ -46,7 +42,7 @@
   --t3:       #64748b;
 }
 
-/* Smooth theme transition */
+/* Transisi tema yang mulus */
 html, body, .nav, .glass, .about-info-card, .skills-group,
 .chip-icon, .chip, .project-card, .edu-card,
 .cert-card, .contact-form-card, .footer, .mobile-menu,
@@ -54,7 +50,7 @@ html, body, .nav, .glass, .about-info-card, .skills-group,
   transition: background-color 0.5s ease, color 0.3s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* ── Reset ── */
+/* ── Atur ulang ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 img { max-width: 100%; display: block; }
@@ -63,7 +59,7 @@ ul, ol { list-style: none; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
 input, textarea { font-family: inherit; }
 
-/* ── Body ── */
+/* ── Isi halaman ── */
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -73,7 +69,7 @@ body {
   transition: background 0.6s ease;
 }
 
-/* Semua section background bersih, satu warna */
+/* Semua bagian memiliki latar belakang bersih dengan satu warna */
 #hero,
 #skills,
 #projects,
@@ -83,7 +79,7 @@ body {
   background: var(--bg);
 }
 
-/* Hapus semua pseudo-element background yang berlebihan */
+/* Hilangkan semua elemen semu latar belakang yang berlebihan */
 #hero::before,
 #hero::after,
 #skills::before,
@@ -98,13 +94,13 @@ body {
 
 #app { position: relative; z-index: 1; }
 
-/* ── Scrollbar ── */
+/* ── Bilah gulir ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-b); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--blue-d); }
 
-/* ── Per-section backgrounds ── */
+/* ── Latar belakang tiap bagian ── */
 
 .section-wrap {
   padding: 96px 0;
@@ -116,7 +112,7 @@ body {
   z-index: 1;
 }
 
-/* Hero — abstract mesh + floating particles */
+/* Hero — kisi abstrak dan partikel mengambang */
 #hero {
   background-color: var(--bg);
   position: relative;
@@ -152,7 +148,7 @@ body {
   pointer-events: none;
 }
 
-/* About — soft smoke blur */
+/* Tentang — kabut lembut yang diburamkan */
 #about {
   background-color: color-mix(in srgb, var(--bg), var(--surface) 35%);
 }
@@ -170,7 +166,7 @@ body {
   pointer-events: none;
 }
 
-/* Skills */
+/* Keahlian */
 #skills {
   background-color: var(--bg);
 }
@@ -196,7 +192,7 @@ body {
   pointer-events: none;
 }
 
-/* Experience */
+/* Pengalaman */
 #experience {
   background-color: var(--bg);
 }
@@ -211,11 +207,11 @@ body {
   pointer-events: none;
 }
 
-/* Projects */
+/* Proyek */
 #projects {
   background-color: var(--bg);
 }
-/* Education */
+/* Pendidikan */
 #education {
   background-color: var(--bg);
 }
@@ -232,7 +228,7 @@ body {
   pointer-events: none;
 }
 
-/* Certificates */
+/* Sertifikat */
 #certificates {
   background-color: var(--bg);
 }
@@ -249,7 +245,7 @@ body {
   pointer-events: none;
 }
 
-/* Contact — green/cyan smoke */
+/* Kontak — kabut hijau/sian */
 #contact {
   background-color: color-mix(in srgb, var(--bg), var(--surface) 40%);
 }
@@ -266,7 +262,7 @@ body {
   pointer-events: none;
 }
 
-/* Background animations */
+/* Animasi latar belakang */
 @keyframes smoke-drift {
   0% { transform: translate3d(-3%, -3%, 0) scale(1); }
   100% { transform: translate3d(3%, 3%, 0) scale(1.08); }
@@ -307,9 +303,9 @@ body {
 }
 @media (max-width: 768px) { .container { padding: 0 20px; } }
 
-/* Scroll reveal utilities — Sederhana & Clean */
-/* Stagger children utilities */
-/* Spotlight hover effect for cards */
+/* Utilitas kemunculan saat gulir — sederhana dan bersih */
+/* Utilitas penundaan bertahap untuk elemen anak */
+/* Efek sorotan saat hover pada kartu */
 .spotlight {
   position: relative;
   overflow: hidden;
@@ -330,16 +326,16 @@ body {
 }
 .spotlight:hover::before { opacity: 1; }
 
-/* Magnetic button */
+/* Tombol magnetik */
 .magnetic {
   display: inline-flex;
   transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
 }
 
-/* Floating animation utility */
+/* Utilitas animasi mengambang */
 .float-anim { animation: float 5s ease-in-out infinite; }
 
-/* Gradient border utility */
+/* Utilitas garis tepi gradien */
 .grad-border {
   position: relative;
   border-radius: var(--r-lg);
@@ -372,7 +368,7 @@ body {
   color: var(--t3);
 }
 
-/* Scroll progress */
+/* Indikator progres gulir */
 #scroll-progress {
   position: fixed;
   top: 0; left: 0;
@@ -383,7 +379,7 @@ body {
   pointer-events: none;
 }
 
-/* Curtain */
+/* Tirai */
 .curtain {
   position: fixed;
   inset: 0;
@@ -395,10 +391,10 @@ body {
 }
 .curtain.out { opacity: 0; }
 
-/* Section separator */
+/* Pemisah bagian */
 main > section:not(:first-child) { position: relative; }
 
-/* ── Keyframes ── */
+/* ── Animasi keyframe ── */
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
@@ -415,7 +411,7 @@ main > section:not(:first-child) { position: relative; }
 @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 
 /* ==============================================
-   NAVBAR
+   BILAH NAVIGASI
    ============================================== */
 .nav {
   position: fixed;
@@ -643,7 +639,7 @@ main > section:not(:first-child) { position: relative; }
 }
 
 /* ==============================================
-   ABOUT
+   TENTANG
    ============================================== */
 #about .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
 #about .label-comment { font-family: var(--mono); font-size: 0.88rem; color: var(--purple); white-space: nowrap; }
@@ -680,7 +676,7 @@ main > section:not(:first-child) { position: relative; }
 }
 .about-bio strong { color: var(--blue-b); font-weight: 700; }
 
-/* Highlight Box */
+/* Kotak sorotan */
 .about-highlight {
   display: flex;
   align-items: flex-start;
@@ -706,7 +702,7 @@ main > section:not(:first-child) { position: relative; }
   font-weight: 500;
 }
 
-/* Kanan - Cards */
+/* Bagian kanan - kartu */
 .about-right {
   display: flex;
   flex-direction: column;
@@ -822,7 +818,7 @@ main > section:not(:first-child) { position: relative; }
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Decorative Line */
+/* Garis dekoratif */
 .about-decorative-line {
   display: flex;
   align-items: center;
@@ -880,7 +876,7 @@ main > section:not(:first-child) { position: relative; }
 }
 
 /* ==============================================
-   SKILLS
+   KEAHLIAN
    ============================================== */
 .skills-label {
   display: flex;
@@ -1040,7 +1036,7 @@ main > section:not(:first-child) { position: relative; }
 }
 
 /* ==============================================
-   EXPERIENCE
+   PENGALAMAN
    ============================================== */
 #experience .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 56px; }
 .label-tag {
@@ -1075,7 +1071,7 @@ main > section:not(:first-child) { position: relative; }
 @media (max-width: 900px) { .exp-layout { grid-template-columns: 1fr; gap: 40px; } .glass-card { padding: 24px; } }
 
 /* ==============================================
-   PROJECTS
+   PROYEK
    ============================================== */
 #projects .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 #projects .label-comment { font-family: var(--mono); font-size: 0.88rem; color: var(--purple); white-space: nowrap; }
@@ -1115,7 +1111,7 @@ main > section:not(:first-child) { position: relative; }
 @media (max-width: 768px) { .projects-grid { grid-template-columns: 1fr; } .card-thumb { height: 180px; } }
 
 /* ==============================================
-   EDUCATION
+   PENDIDIKAN
    ============================================== */
 #education .section-wrap { padding: 80px 0; }
 #education .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
@@ -1130,7 +1126,7 @@ main > section:not(:first-child) { position: relative; }
 @media (max-width: 560px) { .edu-card { padding: 20px; gap: 14px; } .edu-period { width: 100%; text-align: center; } }
 
 /* ==============================================
-   CERTIFICATES
+   SERTIFIKAT
    ============================================== */
 #certificates .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 #certificates .label-comment { font-family: var(--mono); font-size: 0.88rem; color: var(--purple); white-space: nowrap; }
@@ -1149,7 +1145,7 @@ main > section:not(:first-child) { position: relative; }
 @media (max-width: 640px) { .certs-grid { grid-template-columns: 1fr; } }
 
 /* ==============================================
-   CONTACT
+   KONTAK
    ============================================== */
 #contact .contact-label { display: flex; align-items: center; gap: 16px; margin-bottom: 46px; font-family: var(--mono); font-size: 0.82rem; color: var(--purple); }
 #contact .contact-label div { flex: 1; height: 1px; background: var(--border); }
@@ -1171,7 +1167,7 @@ main > section:not(:first-child) { position: relative; }
 #contact .contact-item:hover .contact-item-value { color: var(--blue-b); }
 @media (max-width: 800px) { #contact .contact-layout { grid-template-columns: 1fr; } }
 
-/* Contact Form Card */
+/* Kartu formulir kontak */
 #contact .contact-form-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -1281,7 +1277,7 @@ main > section:not(:first-child) { position: relative; }
 }
 
 /* ==============================================
-   FOOTER
+   BAGIAN BAWAH
    ============================================== */
 .footer { position: relative; background: var(--surface); border-top: 1px solid var(--border); overflow: hidden; }
 .marquee-wrap { width: 100%; overflow: hidden; border-bottom: 1px solid var(--border); padding: 12px 0; position: relative; z-index: 1; background: rgba(13,31,54,0.4); }
@@ -1316,3 +1312,371 @@ main > section:not(:first-child) { position: relative; }
 .section-wrap {
   border-top: 1px solid rgba(125, 211, 252, 0.18);
 }
+
+/* ==============================================
+   HERO — kemunculan, modal CV, ikon Lucide
+   ============================================== */
+.entrance {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--entrance-delay, 0s);
+}
+.entrance.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-icon, .cta-icon, .close-icon, .download-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5;
+}
+.close-icon { width: 20px; height: 20px; }
+
+.cv-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.cv-modal-container {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: var(--card);
+  border: 1px solid var(--border-b);
+  border-radius: var(--r-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  animation: modal-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modal-slide-up {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cv-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.cv-modal-title {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--t1);
+  margin: 0;
+}
+.cv-modal-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--t2);
+  cursor: pointer;
+  transition: all var(--tf);
+}
+.cv-modal-close:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: #f87171;
+  color: #f87171;
+  transform: rotate(90deg);
+}
+.cv-modal-body {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  min-height: 500px;
+}
+.cv-preview-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: none;
+  background: #fff;
+}
+.cv-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+}
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--blue);
+  color: #050d1a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--r-sm);
+  transition: all var(--tf);
+  text-decoration: none;
+  cursor: pointer;
+}
+.cv-download-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+.modal-fade-enter-active { transition: opacity 0.3s ease; }
+.modal-fade-leave-active { transition: opacity 0.2s ease; }
+.modal-fade-enter-from, .modal-fade-leave-to { opacity: 0; }
+
+@media (max-width: 768px) {
+  .cv-modal-container { max-width: 100%; max-height: 95vh; border-radius: var(--r-md); }
+  .cv-modal-header { padding: 16px 20px; }
+  .cv-modal-title { font-size: 1.1rem; }
+  .cv-modal-body, .cv-preview-frame { min-height: 400px; }
+  .cv-modal-footer { padding: 14px 20px; }
+  .cv-download-btn { width: 100%; justify-content: center; }
+}
+
+/* ==============================================
+   KEMAMPUAN — chip gambar keahlian
+   ============================================== */
+.chip-img {
+  width: 2.8rem;
+  height: 2.8rem;
+  object-fit: contain;
+  transition: transform var(--tf);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.img-invert { filter: invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.chip-icon:hover .chip-img { transform: scale(1.15) translateY(-2px); }
+
+/* ==============================================
+   PROYEK — grid kartu
+   ============================================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--blue);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+.project-img-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+.project-card:hover .project-img { transform: scale(1.03); }
+.project-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(10, 22, 40, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.project-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.project-title {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--t1);
+  margin-bottom: 8px;
+}
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--t2);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.project-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  list-style: none;
+  padding: 0;
+}
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--t2);
+  line-height: 1.5;
+}
+.bullet-dot { color: var(--blue); font-weight: bold; }
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+.tech-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--blue-b);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+/* ==============================================
+   PENDIDIKAN — linimasa
+   ============================================== */
+.edu-layout { display: flex; justify-content: center; }
+.edu-timeline { position: relative; width: 100%; max-width: 560px; }
+.edu-timeline-line {
+  position: absolute;
+  left: 18px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--blue), transparent);
+}
+.edu-entry { position: relative; padding-left: 52px; }
+.edu-dot {
+  position: absolute;
+  left: 11px; top: 24px;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 12px rgba(56,189,248,0.5);
+}
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color var(--tf), transform var(--tf), box-shadow var(--tf);
+}
+.edu-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(56,189,248,0.1);
+}
+.edu-card-top { display: flex; align-items: center; justify-content: space-between; }
+.edu-icon-wrap {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(56,189,248,0.1);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: var(--r-sm);
+  color: var(--blue);
+}
+.edu-meta { display: flex; align-items: center; gap: 10px; }
+.edu-period {
+  font-family: var(--mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--t2);
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--surface);
+}
+.edu-school { font-size: 1.2rem; font-weight: 800; color: var(--t1); line-height: 1.3; }
+.edu-program { font-size: 0.88rem; color: var(--blue); font-weight: 600; }
+@media (max-width: 560px) { .edu-entry { padding-left: 40px; } }
+
+/* ==============================================
+   KONTAK — grid kartu kontak
+   ============================================== */
+.contact-header {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 36px;
+}
+.contact-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--t1);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.contact-subtitle {
+  font-size: 0.95rem;
+  color: var(--t2);
+  line-height: 1.6;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contact-card-simple {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.contact-card-simple:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  background: var(--surface);
+}
+.card-info { display: flex; flex-direction: column; gap: 4px; }
+.card-label {
+  font-family: var(--mono);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--blue);
+}
+.card-value { font-size: 0.95rem; font-weight: 700; color: var(--t1); word-break: break-all; }
+.card-arrow { font-size: 1.1rem; color: var(--t3); transition: transform 0.2s ease, color 0.2s ease; }
+.contact-card-simple:hover .card-arrow { color: var(--blue); transform: translate(3px, -3px); }
+@media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }

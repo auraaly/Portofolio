@@ -83,18 +83,5 @@ const toolsSkills = [
 
 </script>
 
-<style scoped>
-.chip-img {
-  width: 2.8rem;
-  height: 2.8rem;
-  object-fit: contain;
-  transition: transform var(--tf);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-.img-invert {
-  filter: invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-.chip-icon:hover .chip-img {
-  transform: scale(1.15) translateY(-2px);
-}
-</style>
+
+

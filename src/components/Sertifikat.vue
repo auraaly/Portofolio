@@ -62,14 +62,5 @@ const certs = [
 
 </script>
 
-<style scoped>
-/* Posisi relative biar glow border bisa posisi absolute */
-.cert-card { 
-  position: relative; 
-}
 
-/* Z-index glow border biar ga ketutupan konten */
-.cert-card.spotlight::before { 
-  z-index: 3; 
-}
-</style>
+
