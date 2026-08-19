@@ -21,8 +21,8 @@
         aria-label="Toggle dark mode"
         @click="toggleTheme"
       >
-        <span v-if="isDark" class="theme-text">🌙 Gelap</span>
-        <span v-else class="theme-text">☀️ Terang</span>
+        <span v-if="isDark" class="theme-text">Mode Gelap</span>
+        <span v-else class="theme-text">Mode Terang</span>
       </button>
 
       <!-- Tombol hamburger menu untuk mobile -->
