@@ -71,7 +71,6 @@ const frontendSkills = [
 const backendSkills = [
   { name: 'PHP',     icon: `${base}/php/php-original.svg` },
   { name: 'MySQL',   icon: `${base}/mysql/mysql-original.svg` },
-  { name: 'Node.js', icon: `${base}/nodejs/nodejs-original.svg` },
 ]
 
 // Daftar peralatan & tools pengembangan yang biasa digunakan
