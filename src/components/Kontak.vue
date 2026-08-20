@@ -11,7 +11,7 @@
       <div class="contact-header">
         <h2 class="contact-title">Mari Terhubung</h2>
         <p class="contact-subtitle">
-          Tertarik untuk berkolaborasi, diskusi proyek, atau informasi mengenai PKL? Silakan hubungi saya melalui kanal berikut.
+          Tertarik untuk berkolaborasi atau diskusi proyek? Silakan hubungi saya melalui tautan berikut.
         </p>
       </div>
 
@@ -29,8 +29,6 @@
             <span class="card-label">{{ item.label }}</span>
             <span class="card-value">{{ item.value }}</span>
           </div>
-          <!-- Arrow icon buat indikasi link keluar -->
-          <div class="card-arrow">↗</div>
         </a>
       </div>
     </div>

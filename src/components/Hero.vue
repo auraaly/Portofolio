@@ -60,12 +60,22 @@
       <Transition name="modal-fade">
         <div v-if="showCVModal" class="cv-modal-overlay" @click="closeCVModal">
           <div class="cv-modal-container" @click.stop>
-            <!-- Header modal dengan tombol close -->
+            <!-- Header modal dengan aksi unduh dan tutup -->
             <div class="cv-modal-header">
               <h3 class="cv-modal-title">Preview CV Aura Amalia</h3>
-              <button @click="closeCVModal" class="cv-modal-close" aria-label="Tutup modal">
-                <i data-lucide="x" class="close-icon"></i>
-              </button>
+              <div class="cv-modal-actions">
+                <a 
+                  href="/AuraAmalia_SMKN7_CV_ATS_REVISI.pdf" 
+                  download="AuraAmalia_CV.pdf" 
+                  class="cv-download-btn"
+                >
+                  <span aria-hidden="true">↓</span>
+                  Unduh CV
+                </a>
+                <button @click="closeCVModal" class="cv-modal-close" aria-label="Tutup modal">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
             </div>
 
             <!-- Preview PDF dalam iframe -->
@@ -75,18 +85,6 @@
                 class="cv-preview-frame"
                 title="Preview CV Aura Amalia"
               ></iframe>
-            </div>
-
-            <!-- Footer dengan tombol download -->
-            <div class="cv-modal-footer">
-              <a 
-                href="/AuraAmalia_SMKN7_CV_ATS_REVISI.pdf" 
-                download="AuraAmalia_CV.pdf" 
-                class="cv-download-btn"
-              >
-                <i data-lucide="download" class="download-icon"></i>
-                Unduh CV (PDF)
-              </a>
             </div>
           </div>
         </div>
@@ -144,6 +142,5 @@ onMounted(() => {
   onUnmounted(() => window.removeEventListener('scroll', onScroll))
 })
 </script>
-
 
 

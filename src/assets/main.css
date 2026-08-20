@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,500;10..48,600;10..48,700;10..48,800&family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 /* ── Variabel ── */
 :root {
@@ -23,7 +23,7 @@
   --tb:       0.28s ease;
   --ts:       0.5s cubic-bezier(0.16,1,0.3,1);
   --font:     'Plus Jakarta Sans', system-ui, sans-serif;
-  --display:  'Outfit', system-ui, sans-serif;
+  --display:  'Space Groteks', system-ui, sans-serif;
   --mono:     'Fira Code', monospace;
   --r-sm:     6px;
   --r-md:     10px;
@@ -530,7 +530,7 @@ main > section:not(:first-child) { position: relative; }
 .hero-name {
   font-family: var(--display);
   font-size: clamp(2.8rem, 5.5vw, 5rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.08;
   margin-bottom: 12px;
@@ -1328,13 +1328,11 @@ main > section:not(:first-child) { position: relative; }
   transform: translateY(0);
 }
 
-.hero-icon, .cta-icon, .close-icon, .download-icon {
+.hero-icon, .cta-icon {
   width: 16px;
   height: 16px;
   stroke-width: 2.5;
 }
-.close-icon { width: 20px; height: 20px; }
-
 .cv-modal-overlay {
   position: fixed;
   inset: 0;
@@ -1377,24 +1375,32 @@ main > section:not(:first-child) { position: relative; }
   color: var(--t1);
   margin: 0;
 }
+.cv-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .cv-modal-close {
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border);
+  border: none;
   background: transparent;
-  color: var(--t2);
+  color: #f87171;
+  font-size: 1.75rem;
+  line-height: 1;
   cursor: pointer;
   transition: all var(--tf);
 }
 .cv-modal-close:hover {
-  background: rgba(248, 113, 113, 0.1);
-  border-color: #f87171;
-  color: #f87171;
-  transform: rotate(90deg);
+  color: #fca5a5;
+  opacity: 0.8;
+}
+.cv-modal-close span {
+  position: relative;
+  top: -1px;
 }
 .cv-modal-body {
   flex: 1;
@@ -1409,17 +1415,11 @@ main > section:not(:first-child) { position: relative; }
   border: none;
   background: #fff;
 }
-.cv-modal-footer {
-  padding: 16px 24px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: center;
-}
 .cv-download-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
+  padding: 10px 16px;
   background: var(--blue);
   color: #050d1a;
   font-weight: 700;
@@ -1440,8 +1440,8 @@ main > section:not(:first-child) { position: relative; }
   .cv-modal-header { padding: 16px 20px; }
   .cv-modal-title { font-size: 1.1rem; }
   .cv-modal-body, .cv-preview-frame { min-height: 400px; }
-  .cv-modal-footer { padding: 14px 20px; }
-  .cv-download-btn { width: 100%; justify-content: center; }
+  .cv-modal-actions { gap: 8px; }
+  .cv-download-btn { padding: 9px 12px; }
 }
 
 /* ==============================================
