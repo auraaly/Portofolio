@@ -1,8 +1,8 @@
 <template>
-  <header class="nav" :class="{ scrolled, hidden: navHidden }">
+  <header class="nav" :class="{ scrolled, hidden: navHidden, 'dark-zone': isDarkZone }">
     <div class="nav-inner container">
 
-      <!-- Link navigasi untuk layar desktop -->
+      <!-- Link navigasi desktop -->
       <nav class="nav-links" role="navigation">
         <a
           v-for="l in links"
@@ -15,7 +15,7 @@
         </a>
       </nav>
 
-      <!-- Tombol hamburger menu untuk mobile -->
+      <!-- Hamburger menu mobile -->
       <button
         class="burger"
         :class="{ open: menuOpen }"
@@ -27,8 +27,8 @@
       </button>
     </div>
 
-    <!-- Menu dropdown untuk versi mobile -->
-    <div class="mobile-menu" :class="{ open: menuOpen }">
+    <!-- Menu dropdown mobile -->
+    <div class="mobile-menu" :class="{ open: menuOpen, dark: isDarkZone }">
       <a
         v-for="l in links"
         :key="l.id"
@@ -45,14 +45,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// State untuk UI navbar
-const scrolled  = ref(false)  // Navbar jadi transparan atau opaque
-const navHidden = ref(false)  // Navbar disembunyiin pas scroll ke bawah
-const menuOpen  = ref(false)  // Menu mobile dibuka atau ditutup
-const active    = ref('hero') // Section mana yang lagi aktif
-let lastY = 0                 // Posisi scroll terakhir buat deteksi arah scroll
+const scrolled    = ref(false)
+const navHidden   = ref(false)
+const menuOpen    = ref(false)
+const active      = ref('hero')
+const isDarkZone  = ref(false) // true saat scroll melewati zona dusk ke malam
+let lastY = 0
 
-// Daftar link menu navigasi
 const links = [
   { id: 'hero',         label: 'Beranda'    },
   { id: 'skills',       label: 'Kemampuan'  },
@@ -62,41 +61,38 @@ const links = [
   { id: 'contact',      label: 'Kontak'     },
 ]
 
-// Daftar ID section untuk deteksi active menu
-const sections = ['hero','skills','projects','education','certificates','contact']
+const sections = ['hero', 'skills', 'projects', 'education', 'certificates', 'contact']
 
-// Fungsi yang jalan tiap kali user scroll
+// Section yang termasuk zona malam (dark zone)
+const darkSections = ['education', 'certificates', 'contact']
+
 function onScroll() {
   const y = window.scrollY
-  
-  // Navbar jadi opaque pas scroll lebih dari 40px
+
   scrolled.value  = y > 40
-  
-  // Hide navbar pas scroll ke bawah cepat
   navHidden.value = y > 200 && y > lastY + 8
-  
-  // Show navbar lagi pas scroll ke atas atau di bagian atas halaman
   if (y < lastY - 5 || y < 200) navHidden.value = false
   lastY = y
 
-  // Deteksi section mana yang lagi keliatan di layar, buat highlight menu
+  // Deteksi section aktif
   const pos = y + 140
   for (let i = sections.length - 1; i >= 0; i--) {
     const el = document.getElementById(sections[i])
-    if (el && el.offsetTop <= pos) { 
+    if (el && el.offsetTop <= pos) {
       active.value = sections[i]
-      break 
+      break
     }
   }
+
+  // Deteksi apakah sedang di zona malam
+  isDarkZone.value = darkSections.includes(active.value)
 }
 
-// Setup listener scroll pas component mount
 onMounted(() => {
   lastY = window.scrollY
   window.addEventListener('scroll', onScroll, { passive: true })
 })
 
-// Bersihin listener pas component unmount
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 

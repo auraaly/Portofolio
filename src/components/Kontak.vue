@@ -1,5 +1,6 @@
 <template>
   <section id="contact" class="section-wrap">
+    <div class="twinkle-stars" aria-hidden="true"></div>
     <div class="container">
       <!-- Badge section -->
       <div class="section-divider">
@@ -29,6 +30,7 @@
             <span class="card-label">{{ item.label }}</span>
             <span class="card-value">{{ item.value }}</span>
           </div>
+          <div class="card-arrow">↗</div>
         </a>
       </div>
     </div>

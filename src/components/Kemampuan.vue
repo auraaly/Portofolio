@@ -16,7 +16,7 @@
           </div>
           <div class="group-chips">
             <div v-for="s in frontendSkills" :key="s.name" class="chip-icon">
-              <img :src="s.icon" :alt="s.name" class="chip-img" />
+              <img :src="s.icon" :alt="s.name" class="chip-img" @error="handleImgError" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -29,7 +29,7 @@
           </div>
           <div class="group-chips">
             <div v-for="s in backendSkills" :key="s.name" class="chip-icon">
-              <img :src="s.icon" :alt="s.name" class="chip-img" />
+              <img :src="s.icon" :alt="s.name" class="chip-img" @error="handleImgError" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -42,7 +42,7 @@
           </div>
           <div class="group-chips">
             <div v-for="s in toolsSkills" :key="s.name" class="chip-icon">
-              <img :src="s.icon" :alt="s.name" class="chip-img" :class="{ 'img-invert': s.invert }" />
+              <img :src="s.icon" :alt="s.name" class="chip-img" :class="{ 'img-invert': s.invert }" @error="handleImgError" />
               <span class="chip-name">{{ s.name }}</span>
             </div>
           </div>
@@ -81,6 +81,9 @@ const toolsSkills = [
   { name: 'Figma',   icon: `${base}/figma/figma-original.svg` },
 ]
 
+function handleImgError(e) {
+  e.target.style.display = 'none'
+}
 </script>
 
 

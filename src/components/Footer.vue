@@ -1,5 +1,6 @@
 <template>
   <footer class="footer">
+    <div class="moon-silhouette" aria-hidden="true"></div>
     <div class="container footer-bottom-inner">
       <span class="footer-copy">&copy; {{ year }} Aura Amalia.</span>
     </div>
