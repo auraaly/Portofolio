@@ -3,7 +3,7 @@
    Zona: Permukaan → Laut Tengah → Laut Dalam → Dasar Laut
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 /* ---------- Tokens ---------- */
 :root {
   /* Palet zona */
@@ -27,8 +27,8 @@
   --r-xl: 28px;
 
   /* Font */
-  --font-display: 'Bricolage Grotesque', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -133,6 +133,11 @@ html.cursor-fx * {
 
 .section-pad {
   padding: clamp(72px, 9vw, 120px) 0;
+  position: relative;
+}
+
+.section-pad-sm {
+  padding: clamp(36px, 5vw, 56px) 0;
   position: relative;
 }
 
@@ -544,7 +549,7 @@ html.cursor-fx * {
 .sand-bed {
   position: absolute;
   inset: auto 0 0 0;
-  height: clamp(90px, 14vw, 170px);
+  height: clamp(60px, 9vw, 110px);
   pointer-events: none;
   z-index: 1;
 }
@@ -571,7 +576,7 @@ html.cursor-fx * {
   top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1160px, calc(100% - 28px));
+  width: min(650px, calc(100% - 28px));
   z-index: 50;
   border-radius: 999px;
   --nv-txt: #0b3a5c;
@@ -865,6 +870,7 @@ html.cursor-fx * {
 
 .btn-ghost {
   background: transparent;
+  border-color: rgba(30, 111, 168, 0.3);
   color: var(--z-txt-soft, #dff3ff);
   padding-inline: 14px;
 }
@@ -1009,6 +1015,7 @@ html.cursor-fx * {
   grid-template-columns: 1.25fr 0.85fr;
   align-items: center;
   gap: clamp(32px, 5vw, 72px);
+  padding-left: clamp(16px, 4vw, 32px); /* Menambah jarak margin sebelah kiri */
 }
 
 .hero-card {
@@ -1018,63 +1025,51 @@ html.cursor-fx * {
   gap: 22px;
 }
 
-/* Kartu hero memakai kaca GELAP — jadi titik fokus kontras
-   di atas langit biru terang, bukan kotak putih yang pudar */
-.hero-card {
-  background: linear-gradient(165deg, rgba(9, 46, 74, 0.8) 0%, rgba(4, 25, 42, 0.66) 100%);
-  border-color: rgba(143, 211, 240, 0.28);
-  box-shadow:
-    0 0 0 1px rgba(30, 111, 168, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 26px 64px rgba(5, 28, 48, 0.5);
+/* Hero text — no card, pure typography */
+.hero-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* Garis kilau halus di tepi atas kaca */
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(190, 235, 255, 0.55), transparent);
+.hero-text .hero-tag {
+  color: #1e6fa8;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(79, 179, 224, 0.35);
 }
 
-.hero-card .hero-tag {
-  color: #7ef0ff;
-  background: rgba(34, 211, 238, 0.1);
-  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.35);
+.hero-text .hello-text {
+  color: #2e6489;
 }
 
-.hero-card .hello-text {
-  color: #9ccfec;
-}
-
-.hero-card .hero-name {
-  background: linear-gradient(115deg, #f2fcff 15%, #7dd3fc 55%, #22d3ee 92%);
+.hero-text .hero-name {
+  background: linear-gradient(120deg, #0b3a5c 20%, #1e6fa8 75%, #0e7490);
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.hero-card .hero-role {
-  color: #bfe8ff;
+.hero-text .hero-role {
+  color: #0d5c8c;
 }
 
-.hero-card .hero-desc {
-  color: #c3ddf0;
+.hero-text .hero-desc {
+  color: #33607f;
 }
 
-.hero-card .hero-meta {
-  color: #9fcbe8;
+.hero-text .hero-meta {
+  color: #2e6489;
 }
 
-.hero-card .btn-outline {
-  color: #eafcff;
-  border-color: rgba(207, 233, 250, 0.5);
+.hero-text .btn-outline {
+  color: var(--ink);
+  border-color: rgba(30, 111, 168, 0.55);
 }
 
-.hero-card .btn-ghost {
-  color: #bfe4f7;
+.hero-text .btn-ghost {
+  color: #1e6fa8;
+  border-color: rgba(30, 111, 168, 0.3);
 }
 
 .hero-tag {
@@ -1102,16 +1097,19 @@ html.cursor-fx * {
 }
 
 .hello-text {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  color: #2e6489;
-  margin-bottom: 6px;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #1e6fa8;
+  margin-bottom: 4px;
 }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5.6vw, 4rem);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 5.8vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
   background: linear-gradient(120deg, #0b3a5c 20%, #1e6fa8 75%, #0e7490);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1119,11 +1117,11 @@ html.cursor-fx * {
 }
 
 /* Nama "muncul ke permukaan" — naik dari balik garis air */
-.hero-card:not(.visible) .hero-name {
+.hero-text:not(.visible) .hero-name {
   opacity: 0;
 }
 
-.hero-card.visible .hero-name {
+.hero-text.visible .hero-name {
   animation: name-surface 0.95s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s backwards;
 }
 
@@ -1144,32 +1142,34 @@ html.cursor-fx * {
 }
 
 .hero-role {
-  margin-top: 10px;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-family: var(--font-body);
+  margin-top: 8px;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 600;
-  color: #0d5c8c;
-}
-
-.hero-desc {
-  max-width: 56ch;
-  font-size: 0.98rem;
-  line-height: 1.75;
-  color: #33607f;
+  letter-spacing: -0.01em;
+  color: #0b3a5c;
 }
 
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 22px;
-  font-size: 0.86rem;
-  color: #2e6489;
+  font-size: 0.82rem;
 }
 
 .hero-meta svg {
-  width: 15px;
-  height: 15px;
-  vertical-align: -3px;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
   margin-right: 5px;
+}
+
+.hero-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0b3a5c;
+  font-weight: 500;
 }
 
 .hero-status i {
@@ -1318,12 +1318,26 @@ html.cursor-fx * {
    ============================================================ */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
 .skill-group {
   padding: 26px 26px 28px;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.skill-group:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 16px 36px rgba(4, 21, 36, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.05);
+  z-index: 2;
 }
 
 .skill-label {
@@ -1825,20 +1839,6 @@ html.cursor-fx * {
   overflow: hidden;
 }
 
-/* Nomor arsip transparan di pojok — identitas khas blok sertifikat */
-.cert-index {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 2.6rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: rgba(255, 216, 150, 0.15);
-  pointer-events: none;
-  user-select: none;
-}
 
 /* Sapuan cahaya seperti pantulan di kaca yang tenggelam */
 .cert-card::after {
@@ -1958,7 +1958,7 @@ html.cursor-fx * {
 .footer {
   position: relative;
   z-index: 2;
-  padding: 26px 0 clamp(110px, 15vw, 190px);
+  padding: 10px 0 clamp(70px, 10vw, 120px);
 }
 
 .footer-inner {
@@ -1981,117 +1981,6 @@ html.cursor-fx * {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(188, 217, 236, 0.45);
-}
-
-/* ============================================================
-   MODAL CV
-   ============================================================ */
-.cv-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: rgba(4, 21, 36, 0.78);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
-.cv-modal-container {
-  width: min(920px, 100%);
-  height: min(86vh, 760px);
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  background: #083254;
-  border: 1px solid rgba(143, 211, 240, 0.25);
-  box-shadow: 0 40px 90px rgba(2, 12, 24, 0.7);
-  animation: modal-slide-up 0.35s cubic-bezier(0.2, 0.7, 0.25, 1);
-}
-
-@keyframes modal-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(28px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.cv-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 22px;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(143, 211, 240, 0.16);
-}
-
-.cv-modal-title {
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  color: #eaf6ff;
-}
-
-.cv-modal-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cv-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #04222c;
-  background: linear-gradient(135deg, #22d3ee, #0891b2);
-}
-
-.cv-modal-close {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.07);
-  color: #bcd9ec;
-  font-size: 1.25rem;
-  line-height: 1;
-}
-
-.cv-modal-close:hover {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.cv-modal-body {
-  flex: 1;
-  background: #d7e5ef;
-}
-
-.cv-preview-frame {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  opacity: 0;
 }
 
 /* ============================================================

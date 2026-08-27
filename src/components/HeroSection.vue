@@ -9,42 +9,45 @@
     <AmbientBubbles :count="7" />
 
     <div class="container hero-grid">
-      <article v-tilt="{ max: 4 }" class="glass glass-strong hero-card entrance" style="--entrance-delay: 0.05s">
-        <span class="hero-tag">
-          <span class="hero-tag-dot"></span>
-          Portofolio 2026
-        </span>
+      <article class="hero-text entrance" style="--entrance-delay: 0.05s">
+
 
         <div>
           <p class="hello-text">Halo, saya</p>
-          <h1 class="hero-name">Aura Amalia</h1>
+          <h3 class="hero-name">Aura Amalia</h3>
           <p class="hero-role">Junior Web Developer</p>
         </div>
 
         <p class="hero-desc">
-          Siswa SMK Negeri 7 Samarinda jurusan PPLG, tertarik mendalami pengembangan perangkat lunak
-          dari sisi frontend maupun backend.
+        Murid kelas 12 jurusan Pengembangan Perangkat Lunak dan Gim (PPLG)
+        di SMK Negeri 7 Samarinda. Saya memiliki ketertarikan mendalam di bidang web development, 
+        khususnya dalam membangun tampilan web yang responsif serta mengelola logika sistem pendukungnya.
         </p>
 
         <div class="hero-meta">
           <span class="hero-location">
-            <i data-lucide="map-pin"></i>
+            <i data-lucide="map"></i>
             Samarinda, Indonesia
           </span>
         </div>
 
         <div class="hero-ctas">
-          <button v-magnet @click="openCVModal" class="btn btn-primary">
-            <i data-lucide="file-text" class="btn-icon"></i>
-            Lihat CV Saya
-          </button>
+          <a
+            href="/AuraAmalia_SMKN7_CV_ATS_REVISI.pdf"
+            download="AuraAmalia_CV.pdf"
+            v-magnet
+            class="btn btn-primary"
+          >
+            <i data-lucide="download" class="btn-icon"></i>
+            Unduh CV
+          </a>
           <button v-magnet @click="goTo('projects')" class="btn btn-outline">
-            Lihat Proyek
             <i data-lucide="arrow-right" class="btn-icon"></i>
+            Lihat Proyek
           </button>
           <button v-magnet @click="goTo('contact')" class="btn btn-ghost">
-            Hubungi Saya
             <i data-lucide="arrow-down" class="btn-icon"></i>
+            Hubungi Saya
           </button>
         </div>
       </article>
@@ -64,66 +67,25 @@
         </div>
       </div>
     </div>
-
-    <Teleport to="body">
-      <Transition name="modal-fade">
-        <div v-if="showCVModal" class="cv-modal-overlay" @click="closeCVModal">
-          <div class="cv-modal-container" @click.stop>
-            <div class="cv-modal-header">
-              <h3 class="cv-modal-title">CV — Aura Amalia</h3>
-              <div class="cv-modal-actions">
-                <a
-                  href="/AuraAmalia_SMKN7_CV_ATS_REVISI.pdf"
-                  download="AuraAmalia_CV.pdf"
-                  class="cv-download-btn"
-                >
-                  <i data-lucide="download" style="width: 14px; height: 14px"></i>
-                  Unduh PDF
-                </a>
-                <button @click="closeCVModal" class="cv-modal-close" aria-label="Tutup">
-                  <span>&times;</span>
-                </button>
-              </div>
-            </div>
-            <div class="cv-modal-body">
-              <iframe
-                src="/AuraAmalia_SMKN7_CV_ATS_REVISI.pdf#toolbar=0"
-                class="cv-preview-frame"
-                title="CV Aura Amalia"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
   </section>
 </template>
 
 <script setup>
-import { ref, nextTick, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import profileImg from '/aurabd.jpeg'
-import AmbientBubbles from './AmbientBubbles.vue'
-import { vTilt, vMagnet } from '../directives/pointer'
-
-const showCVModal = ref(false)
-
-function openCVModal() {
-  showCVModal.value = true
-  document.body.style.overflow = 'hidden'
-  nextTick(() => {
-    if (window.lucide) window.lucide.createIcons()
-  })
-}
-
-function closeCVModal() {
-  showCVModal.value = false
-  document.body.style.overflow = ''
-}
+import AmbientBubbles from './effects/AmbientBubbles.vue'
+import { vMagnet } from '../directives/pointer'
 
 function goTo(id) {
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
+
+onMounted(() => {
+  if (window.lucide) {
+    window.lucide.createIcons()
+  }
+})
 
 onUnmounted(() => {
   document.body.style.overflow = ''

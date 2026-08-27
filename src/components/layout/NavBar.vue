@@ -2,8 +2,7 @@
   <header class="nav" :class="[zoneClass, { scrolled }]">
     <div class="nav-inner">
       <button class="nav-brand" @click="scrollTop">
-        <span class="nav-brand-dot"></span>
-        aura.amalia
+  
       </button>
 
       <nav class="nav-links" role="navigation">

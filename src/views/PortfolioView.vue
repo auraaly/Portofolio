@@ -272,17 +272,17 @@
 
 <script setup>
 import { ref, computed, nextTick, onUnmounted } from 'vue'
-import OceanPreloader from '../components/OceanPreloader.vue'
-import CustomCursor from '../components/CustomCursor.vue'
-import NavBar from '../components/NavBar.vue'
+import OceanPreloader from '../components/effects/OceanPreloader.vue'
+import CustomCursor from '../components/layout/CustomCursor.vue'
+import NavBar from '../components/layout/NavBar.vue'
 import HeroSection from '../components/HeroSection.vue'
 import SkillsSection from '../components/SkillsSection.vue'
 import ProyekSection from '../components/ProyekSection.vue'
 import PendidikanSection from '../components/PendidikanSection.vue'
 import SertifikatSection from '../components/SertifikatSection.vue'
 import KontakSection from '../components/KontakSection.vue'
-import FooterSection from '../components/FooterSection.vue'
-import AmbientBubbles from '../components/AmbientBubbles.vue'
+import FooterSection from '../components/layout/FooterSection.vue'
+import AmbientBubbles from '../components/effects/AmbientBubbles.vue'
 
 const ready = ref(false)
 const scrollPct = ref(0)
