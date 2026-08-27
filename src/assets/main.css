@@ -1470,40 +1470,7 @@ html.cursor-fx * {
   opacity: 1;
 }
 
-.detail-hint {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: #eafcff;
-  background: rgba(4, 21, 36, 0.66);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(125, 211, 252, 0.35);
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.28s ease,
-    transform 0.28s ease;
-}
 
-.detail-hint svg {
-  width: 13px;
-  height: 13px;
-}
-
-.project-card:hover .detail-hint,
-.project-card:focus-visible .detail-hint {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 .project-img-box {
   position: relative;
