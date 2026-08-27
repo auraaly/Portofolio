@@ -117,10 +117,6 @@
                 <i data-lucide="github" class="btn-icon"></i>
                 Lihat di GitHub
               </a>
-              <button class="btn neon-btn" @click="askDetail">
-                Tanya Detail
-                <i data-lucide="arrow-up-right" class="btn-icon"></i>
-              </button>
             </footer>
           </div>
         </div>
