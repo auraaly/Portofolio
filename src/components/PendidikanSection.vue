@@ -55,7 +55,7 @@ const eduList = [
   {
     school: 'SMP Negeri 16 Samarinda',
     program: 'Sekolah Menengah Pertama',
-    period: '2021 — 2024',
+    period: '2022 — 2024',
     icon: bookIcon,
   },
 ]

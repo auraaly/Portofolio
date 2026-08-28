@@ -137,6 +137,17 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.pm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(2, 11, 20, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cv-modal-container {
   width: min(900px, 92vw);
   height: 85vh;
@@ -161,6 +172,24 @@ onUnmounted(() => {
 .cv-actions {
   display: flex;
   align-items: center;
+}
+
+.pm-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pm-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 .cv-modal-body {

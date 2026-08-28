@@ -15,7 +15,6 @@
         class="glass cert-card entrance"
         :style="{ '--entrance-delay': `${0.08 * i}s` }"
       >
-        <span class="cert-index" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
         <span class="cert-issuer">{{ cert.issuer }}</span>
         <h4 class="cert-title">{{ cert.title }}</h4>
         <p class="cert-desc">{{ cert.desc }}</p>
